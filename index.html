@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
 
 <title>Dewi & Panji — Wedding Invitation</title>
 
@@ -1413,7 +1413,7 @@ OPENING
         </h1>
 
         <div class="opening-date">
-            20 · 12 · 2026
+            13 · 12 · 2026
         </div>
 
         <button
@@ -1454,7 +1454,7 @@ HERO
         <div class="hero-line"></div>
 
         <div class="hero-date">
-            20 · 12 · 2026
+            13 · 12 · 2026
         </div>
 
         <div class="hero-scroll">
@@ -1510,7 +1510,7 @@ COUPLE
             </h3>
 
             <p>
-                Putri dari Bapak & Ibu fulan
+                Putri dari Alm Bapak Basirun & ibu Rokaya
             </p>
 
         </div>
@@ -1542,7 +1542,7 @@ COUPLE
             </h3>
 
             <p>
-                Putra dari Bapak & Ibu fulan
+                Putra dari Bapak Sumedi & Ibu Saemah
             </p>
 
         </div>
@@ -1970,7 +1970,12 @@ GIFT
 
         <p>
             BCA<br>
-            1234567890<br>
+            5212577324<br>
+            DEWI OKTAVIA
+        </p>
+        <p>
+            MANDIRI<br>
+            1560022834958<br>
             DEWI OKTAVIA
         </p>
 
@@ -2313,7 +2318,7 @@ COUNTDOWN
 
 var weddingDate =
     new Date(
-        "December 20, 2026 09:00:00"
+        "December 13, 2026 09:00:00"
     ).getTime();
 
 function updateCountdown(){
@@ -3852,6 +3857,117 @@ Foto dari panel admin disimpan di Firestore (koleksi "foto", id bg1-bg3).
 
 })();
 </script>
+
+
+<!-- ======================================================
+PERBAIKAN TAMPILAN HP (tambahan)
+Mencegah halaman melebar ke samping (penyebab tampilan terpotong
+dan harus di-zoom out) akibat animasi yang menggeser elemen ke kanan/kiri.
+====================================================== -->
+
+<style>
+html{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+section,
+footer{
+    overflow-x:clip;
+}
+</style>
+
+
+<!-- ======================================================
+FONT NAMA MEMPELAI & ORANG TUA (tambahan)
+Nama mempelai: Pinyon Script. Nama orang tua: Cormorant Garamond italic.
+Ukuran bisa diubah di bagian CSS di bawah ini.
+====================================================== -->
+
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ---------- nama besar: layar pembuka & hero ---------- */
+
+.opening h1{
+    font-family:'Pinyon Script',cursive;
+    font-weight:400;
+    font-size:88px;
+    line-height:1.1;
+}
+
+.hero h1{
+    font-family:'Pinyon Script',cursive;
+    font-weight:400;
+    font-size:clamp(75px,14vw,140px);
+    line-height:1;
+}
+
+.opening h1 span,
+.hero h1 span{
+    font-style:normal;
+}
+
+/* ---------- nama di kartu mempelai ---------- */
+
+.person h3{
+    font-family:'Pinyon Script',cursive;
+    font-weight:400;
+    font-size:34px;
+    line-height:1.15;
+}
+
+/* ---------- nama orang tua ---------- */
+
+.person p{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:14px;
+    line-height:1.5;
+    opacity:.85;
+}
+
+@media(max-width:700px){
+
+    .opening h1{
+        font-size:70px;
+    }
+
+    .hero h1{
+        font-size:80px;
+    }
+
+    .person h3{
+        font-size:28px;
+    }
+}
+
+@media(max-width:420px){
+
+    .opening h1{
+        font-size:58px;
+    }
+
+    .hero h1{
+        font-size:70px;
+    }
+
+    .person h3{
+        font-size:25px;
+    }
+
+    .person p{
+        font-size:13px;
+    }
+}
+
+</style>
 
 </body>
     </html>
