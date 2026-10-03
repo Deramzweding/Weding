@@ -1,0 +1,3295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Dewi & Panji — Wedding Invitation</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:'Montserrat',sans-serif;
+    color:#fff;
+    background:#080705;
+    overflow-x:hidden;
+}
+
+/* =========================
+FULL VIDEO BACKGROUND
+========================= */
+
+#pageVideo{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100vw;
+    height:100vh;
+
+    min-width:100%;
+    min-height:100%;
+
+    object-fit:cover;
+    object-position:center center;
+
+    z-index:-20;
+
+    background:#080705;
+}
+
+.video-dark{
+    position:fixed;
+    inset:0;
+
+    z-index:-19;
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.45),
+            rgba(0,0,0,.68)
+        );
+}
+
+.video-gold{
+    position:fixed;
+    inset:0;
+
+    z-index:-18;
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(211,169,78,.17),
+            transparent 48%
+        ),
+        linear-gradient(
+            rgba(65,42,12,.05),
+            rgba(10,7,3,.28)
+        );
+}
+
+/* =========================
+GENERAL
+========================= */
+
+section{
+    position:relative;
+    width:100%;
+
+    background:rgba(0,0,0,.16);
+
+    border-bottom:
+        1px solid rgba(214,170,77,.12);
+}
+
+.container{
+    width:min(920px,92%);
+    margin:auto;
+}
+
+.small-title{
+    font-size:10px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#d8b568;
+    margin-bottom:8px;
+}
+
+.section-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:42px;
+    line-height:1;
+    font-weight:500;
+    margin-bottom:15px;
+}
+
+.section-desc{
+    max-width:650px;
+    margin:auto;
+
+    color:rgba(255,255,255,.78);
+
+    line-height:1.8;
+    font-size:14px;
+}
+
+/* =========================
+OPENING
+========================= */
+
+.opening{
+    position:fixed;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            rgba(0,0,0,.70),
+            rgba(0,0,0,.88)
+        );
+
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+.opening.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.opening-inner{
+    width:92%;
+    max-width:650px;
+}
+
+.opening-small{
+    font-size:10px;
+    letter-spacing:5px;
+    color:#d8b568;
+    margin-bottom:10px;
+}
+
+.opening h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:70px;
+    font-weight:500;
+    line-height:.85;
+}
+
+.opening h1 span{
+    color:#d5a94d;
+    font-style:italic;
+}
+
+.opening-date{
+    margin:22px 0;
+
+    font-size:12px;
+    letter-spacing:4px;
+    color:#e4c77f;
+}
+
+.open-btn{
+    border:1px solid #d7ad51;
+
+    background:rgba(0,0,0,.28);
+
+    color:white;
+
+    padding:13px 30px;
+
+    border-radius:50px;
+
+    cursor:pointer;
+
+    letter-spacing:2px;
+    font-size:11px;
+
+    transition:.3s;
+}
+
+.open-btn:hover{
+    background:#d7ad51;
+    color:#111;
+}
+
+.opening-scroll{
+    margin-top:35px;
+
+    font-size:9px;
+    letter-spacing:3px;
+
+    opacity:.7;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    min-height:100svh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    background:transparent;
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transform:translateY(25px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease,
+        visibility 1s ease;
+}
+
+.hero.show{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    transform:translateY(0);
+}
+
+.hero-inner{
+    width:92%;
+    max-width:800px;
+
+    padding:100px 0 70px;
+}
+
+.hero-kicker{
+    font-size:10px;
+    letter-spacing:5px;
+    color:#d9b563;
+
+    margin-bottom:12px;
+}
+
+.hero h1{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:
+        clamp(65px,12vw,125px);
+
+    line-height:.75;
+
+    font-weight:500;
+}
+
+.hero h1 span{
+    color:#d6ab52;
+    font-style:italic;
+}
+
+.hero-date{
+    margin-top:25px;
+
+    font-size:12px;
+    letter-spacing:4px;
+}
+
+.hero-line{
+    width:60px;
+    height:1px;
+
+    background:#d4aa54;
+
+    margin:16px auto;
+}
+
+.hero-scroll{
+    margin-top:60px;
+
+    font-size:9px;
+    letter-spacing:4px;
+
+    opacity:.7;
+}
+
+/* =========================
+COUPLE
+========================= */
+
+.couple{
+    padding:90px 0;
+
+    text-align:center;
+
+    background:rgba(4,4,3,.38);
+}
+
+.couple-grid{
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:35px;
+
+    margin-top:40px;
+}
+
+.person{
+    width:210px;
+}
+
+.photo-wrap{
+    position:relative;
+
+    width:175px;
+    height:175px;
+
+    margin:0 auto 18px;
+}
+
+.couple-photo{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    padding:5px;
+
+    border:1px solid #d3a94f;
+
+    opacity:0;
+
+    transform:
+        translateX(35px)
+        scale(.96);
+
+    transition:
+        opacity .9s ease,
+        transform .9s ease;
+}
+
+.couple-photo.active{
+    opacity:1;
+
+    transform:
+        translateX(0)
+        scale(1);
+}
+
+.person h3{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:27px;
+    font-weight:500;
+}
+
+.person p{
+    font-size:10px;
+
+    opacity:.65;
+
+    line-height:1.6;
+}
+
+.and{
+    font-family:'Cormorant Garamond',serif;
+
+    color:#d4a84e;
+
+    font-size:55px;
+}
+
+/* =========================
+COUNTDOWN
+========================= */
+
+.countdown{
+    padding:60px 0 85px;
+
+    text-align:center;
+
+    background:rgba(4,4,3,.30);
+}
+
+.timer{
+    width:min(700px,94%);
+
+    margin:30px auto 0;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    border:
+        1px solid rgba(213,170,79,.38);
+
+    border-radius:8px;
+
+    overflow:hidden;
+}
+
+.time-box{
+    padding:20px 5px;
+
+    border-right:
+        1px solid rgba(213,170,79,.35);
+}
+
+.time-box:last-child{
+    border-right:0;
+}
+
+.time-number{
+    font-family:'Cormorant Garamond',serif;
+
+    color:#e0ba68;
+
+    font-size:34px;
+}
+
+.time-label{
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    opacity:.7;
+
+    margin-top:4px;
+}
+
+/* =========================
+STORY
+========================= */
+
+.story{
+    padding:90px 0;
+
+    text-align:center;
+
+    background:rgba(3,3,2,.43);
+}
+
+.story-content{
+    max-width:560px;
+
+    margin:auto;
+
+    color:rgba(255,255,255,.78);
+
+    font-size:13px;
+
+    line-height:2;
+}
+
+.story-line{
+    width:35px;
+    height:1px;
+
+    background:#d6ad59;
+
+    margin:25px auto;
+}
+
+/* =========================
+GALLERY
+========================= */
+
+.gallery{
+    padding:80px 0;
+
+    text-align:center;
+
+    background:rgba(3,3,2,.30);
+}
+
+.gallery-grid{
+    width:min(760px,95%);
+
+    margin:30px auto 0;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:8px;
+}
+
+.gallery-item{
+    height:150px;
+
+    overflow:hidden;
+
+    border:
+        1px solid rgba(213,170,79,.55);
+
+    border-radius:7px;
+
+    cursor:pointer;
+}
+
+.gallery-item img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:
+        transform .7s ease;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.08);
+}
+
+/* =========================
+EVENT
+========================= */
+
+.event{
+    padding:80px 0;
+
+    text-align:center;
+
+    background:rgba(3,3,2,.45);
+}
+
+.event-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+
+    width:min(760px,95%);
+
+    margin:35px auto 0;
+}
+
+.event-card{
+    padding:30px 20px;
+
+    border:
+        1px solid rgba(215,171,78,.55);
+
+    border-radius:12px;
+
+    background:rgba(10,8,5,.35);
+
+    backdrop-filter:blur(8px);
+}
+
+.event-icon{
+    font-size:25px;
+
+    color:#e0b45d;
+
+    margin-bottom:12px;
+}
+
+.event-card h3{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:27px;
+
+    font-weight:500;
+
+    margin-bottom:12px;
+}
+
+.event-card p{
+    font-size:11px;
+
+    line-height:1.8;
+
+    opacity:.8;
+}
+
+.location-btn{
+    display:inline-block;
+
+    margin-top:18px;
+
+    color:white;
+
+    border:
+        1px solid #cfa753;
+
+    border-radius:30px;
+
+    padding:9px 18px;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+
+    text-decoration:none;
+}
+
+/* =========================
+RSVP
+========================= */
+
+.rsvp{
+    position:relative;
+
+    padding:85px 0 105px;
+
+    background:
+        linear-gradient(
+            rgba(87,62,17,.48),
+            rgba(37,26,9,.72)
+        );
+
+    overflow:hidden;
+}
+
+.rsvp::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at 15% 25%,
+            rgba(221,177,79,.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(221,177,79,.13),
+            transparent 35%
+        );
+}
+
+.rsvp .container{
+    position:relative;
+    z-index:2;
+}
+
+.rsvp-head{
+    text-align:center;
+
+    margin-bottom:35px;
+}
+
+.rsvp-head .section-title{
+    font-size:47px;
+
+    margin-bottom:12px;
+}
+
+.rsvp-description{
+    max-width:650px;
+
+    margin:auto;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+    color:rgba(255,255,255,.86);
+}
+
+.rsvp-step{
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:14px;
+
+    margin:25px 0 35px;
+}
+
+.step-circle{
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#333;
+
+    font-weight:700;
+
+    font-size:18px;
+}
+
+.step-text{
+    font-size:20px;
+
+    font-weight:700;
+}
+
+.rsvp-form{
+    width:min(590px,100%);
+
+    margin:auto;
+}
+
+.form-group{
+    margin-bottom:25px;
+}
+
+.form-label{
+    display:block;
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+    font-weight:500;
+}
+
+.form-input,
+.form-textarea{
+    width:100%;
+
+    border:0;
+    outline:none;
+
+    border-radius:13px;
+
+    padding:18px 20px;
+
+    background:
+        rgba(220,214,193,.34);
+
+    color:white;
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:15px;
+
+    backdrop-filter:blur(8px);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder{
+    color:
+        rgba(255,255,255,.62);
+}
+
+.form-textarea{
+    min-height:160px;
+
+    resize:vertical;
+}
+
+.attendance-label{
+    font-size:14px;
+
+    margin-bottom:12px;
+}
+
+.attendance{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+}
+
+.attendance button{
+    min-height:62px;
+
+    border:
+        1px solid rgba(255,255,255,.9);
+
+    background:
+        rgba(30,22,10,.18);
+
+    color:white;
+
+    border-radius:15px;
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.attendance button:first-child{
+    grid-column:
+        1 / -1;
+}
+
+.attendance button.active,
+.attendance button:hover{
+    background:
+        rgba(221,181,91,.22);
+
+    border-color:#e0b45c;
+
+    box-shadow:
+        0 0 20px
+        rgba(218,174,74,.16);
+}
+
+.sticker-btn{
+    border:
+        1px solid white;
+
+    background:
+        rgba(20,15,8,.25);
+
+    color:white;
+
+    border-radius:13px;
+
+    padding:14px 22px;
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.send-btn{
+    width:100%;
+
+    min-height:60px;
+
+    border:
+        1px solid rgba(255,255,255,.9);
+
+    background:
+        rgba(24,18,8,.28);
+
+    color:white;
+
+    border-radius:14px;
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+}
+
+.send-btn:hover{
+    background:
+        rgba(213,171,80,.2);
+
+    border-color:#dcb45d;
+
+    transform:translateY(-2px);
+}
+
+/* =========================
+GIFT
+========================= */
+
+.gift{
+    padding:80px 0;
+
+    text-align:center;
+
+    background:rgba(3,3,2,.40);
+}
+
+.gift-card{
+    width:min(500px,92%);
+
+    margin:30px auto 0;
+
+    padding:25px;
+
+    border:
+        1px solid rgba(214,172,80,.55);
+
+    border-radius:12px;
+
+    background:
+        rgba(5,4,2,.32);
+}
+
+.gift-card h3{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:28px;
+
+    font-weight:500;
+}
+
+.gift-card p{
+    font-size:11px;
+
+    line-height:1.8;
+
+    margin-top:10px;
+
+    opacity:.75;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+    padding:60px 20px 100px;
+
+    text-align:center;
+
+    background:rgba(2,2,1,.62);
+}
+
+footer h2{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:35px;
+
+    font-weight:500;
+}
+
+footer p{
+    margin-top:10px;
+
+    font-size:10px;
+
+    opacity:.6;
+}
+
+/* =========================
+MUSIC
+========================= */
+
+.music-btn{
+    position:fixed;
+
+    right:20px;
+    bottom:20px;
+
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(215,174,81,.88);
+
+    color:#17120a;
+
+    border:
+        1px solid #f1d38a;
+
+    z-index:500;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 25px
+        rgba(214,170,73,.35);
+
+    font-size:20px;
+}
+
+.music-btn.playing{
+    animation:
+        musicRotate 2.5s linear infinite;
+}
+
+@keyframes musicRotate{
+
+    from{
+        transform:rotate(0);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+/* =========================
+LIGHTBOX
+========================= */
+
+.lightbox{
+    position:fixed;
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(0,0,0,.9);
+
+    z-index:9000;
+
+    padding:20px;
+}
+
+.lightbox.show{
+    display:flex;
+}
+
+.lightbox img{
+    max-width:95%;
+    max-height:90%;
+
+    border-radius:8px;
+}
+
+.lightbox-close{
+    position:absolute;
+
+    top:20px;
+    right:25px;
+
+    font-size:35px;
+
+    cursor:pointer;
+}
+
+/* =========================
+ADMIN — BENAR-BENAR HIDDEN
+========================= */
+
+/*
+   Tidak ada icon.
+   Tidak ada tombol.
+   Hanya area transparan
+   untuk 5x tap.
+*/
+
+.admin-trigger{
+    position:fixed;
+
+    top:0;
+    right:0;
+
+    width:70px;
+    height:70px;
+
+    opacity:0;
+
+    background:transparent;
+
+    border:0;
+
+    z-index:100000;
+
+    cursor:default;
+}
+
+/* ADMIN PANEL */
+
+.admin-panel{
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(0,0,0,.92);
+
+    z-index:100001;
+
+    padding:20px;
+}
+
+.admin-panel.show{
+    display:flex;
+}
+
+.admin-box{
+    width:min(500px,100%);
+
+    max-height:90vh;
+
+    overflow:auto;
+
+    background:#15120d;
+
+    border:
+        1px solid #bd9140;
+
+    border-radius:15px;
+
+    padding:25px;
+}
+
+.admin-box h2{
+    font-family:'Cormorant Garamond',serif;
+
+    font-size:32px;
+
+    margin-bottom:20px;
+}
+
+.admin-box label{
+    display:block;
+
+    font-size:11px;
+
+    margin:15px 0 7px;
+
+    color:#dcb96d;
+}
+
+.admin-box input{
+    width:100%;
+
+    padding:12px;
+
+    border:
+        1px solid rgba(255,255,255,.2);
+
+    border-radius:7px;
+
+    background:#242018;
+
+    color:white;
+}
+
+.admin-close{
+    float:right;
+
+    cursor:pointer;
+
+    font-size:25px;
+}
+
+.admin-save{
+    width:100%;
+
+    padding:13px;
+
+    margin-top:20px;
+
+    background:#c99d4a;
+
+    color:#111;
+
+    border:0;
+
+    border-radius:8px;
+
+    font-weight:700;
+}
+
+/* =========================
+SCROLL REVEAL
+========================= */
+
+.reveal{
+    opacity:0;
+
+    transform:
+        translateY(65px)
+        scale(.98);
+
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.22,.61,.36,1);
+}
+
+.reveal.left{
+    transform:
+        translateX(-70px);
+}
+
+.reveal.right{
+    transform:
+        translateX(70px);
+}
+
+.reveal.visible{
+    opacity:1;
+
+    transform:
+        translate(0)
+        scale(1);
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .opening h1{
+        font-size:55px;
+    }
+
+    .hero h1{
+        font-size:70px;
+    }
+
+    .section-title{
+        font-size:37px;
+    }
+
+    .couple-grid{
+        gap:8px;
+    }
+
+    .person{
+        width:145px;
+    }
+
+    .photo-wrap{
+        width:130px;
+        height:130px;
+    }
+
+    .person h3{
+        font-size:22px;
+    }
+
+    .and{
+        font-size:42px;
+    }
+
+    .timer{
+        width:94%;
+    }
+
+    .time-number{
+        font-size:27px;
+    }
+
+    .gallery-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .gallery-item{
+        height:125px;
+    }
+
+    .event-grid{
+        grid-template-columns:1fr;
+    }
+
+    .rsvp{
+        padding-top:70px;
+    }
+
+    .rsvp-head .section-title{
+        font-size:39px;
+    }
+
+    .rsvp-description{
+        font-size:12px;
+    }
+
+}
+
+@media(max-width:420px){
+
+    .hero h1{
+        font-size:62px;
+    }
+
+    .couple-grid{
+        gap:0;
+    }
+
+    .person{
+        width:130px;
+    }
+
+    .photo-wrap{
+        width:115px;
+        height:115px;
+    }
+
+    .and{
+        font-size:35px;
+    }
+
+    .attendance button{
+        font-size:12px;
+    }
+
+    .form-input,
+    .form-textarea{
+        font-size:13px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+VIDEO
+========================= -->
+
+<video
+    id="pageVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto">
+
+    <source
+        src="video-wedding.mp4"
+        type="video/mp4">
+
+</video>
+
+<div class="video-dark"></div>
+<div class="video-gold"></div>
+
+
+<!-- =========================
+OPENING
+========================= -->
+
+<div
+    class="opening"
+    id="opening">
+
+    <div class="opening-inner">
+
+        <div class="opening-small">
+            THE WEDDING OF
+        </div>
+
+        <h1>
+            Dewi
+            <span>&</span>
+            Panji
+        </h1>
+
+        <div class="opening-date">
+            20 · 12 · 2026
+        </div>
+
+        <button
+            class="open-btn"
+            onclick="openInvitation()">
+
+            BUKA UNDANGAN
+
+        </button>
+
+        <div class="opening-scroll">
+            ↓ &nbsp; SCROLL TO EXPLORE
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-inner">
+
+        <div class="hero-kicker">
+            THE WEDDING OF
+        </div>
+
+        <h1>
+            Dewi
+            <span>&</span>
+            Panji
+        </h1>
+
+        <div class="hero-line"></div>
+
+        <div class="hero-date">
+            20 · 12 · 2026
+        </div>
+
+        <div class="hero-scroll">
+            ↓<br>
+            SCROLL TO EXPLORE
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+COUPLE
+========================= -->
+
+<section class="couple">
+
+<div class="container">
+
+    <div class="reveal">
+
+        <div class="small-title">
+            THE COUPLE
+        </div>
+
+        <div class="section-title">
+            We Are Getting Married
+        </div>
+
+    </div>
+
+    <div class="couple-grid">
+
+        <div class="person reveal left">
+
+            <div class="photo-wrap">
+
+                <img
+                    class="couple-photo active"
+                    src="dewi1.jpg"
+                    id="dewi1">
+
+                <img
+                    class="couple-photo"
+                    src="dewi2.jpg"
+                    id="dewi2">
+
+            </div>
+
+            <h3>
+                Dewi oktavia
+            </h3>
+
+            <p>
+                Putri dari Bapak & Ibu fulan
+            </p>
+
+        </div>
+
+
+        <div class="and reveal">
+            &
+        </div>
+
+
+        <div class="person reveal right">
+
+            <div class="photo-wrap">
+
+                <img
+                    class="couple-photo active"
+                    src="panji1.jpg"
+                    id="panji1">
+
+                <img
+                    class="couple-photo"
+                    src="panji2.jpg"
+                    id="panji2">
+
+            </div>
+
+            <h3>
+                Panji Ahmadien
+            </h3>
+
+            <p>
+                Putra dari Bapak & Ibu fulan
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+COUNTDOWN
+========================= -->
+
+<section class="countdown">
+
+<div class="container reveal">
+
+    <div class="small-title">
+        COUNTDOWN
+    </div>
+
+    <div class="section-title">
+        Our Special Day
+    </div>
+
+    <div class="timer">
+
+        <div class="time-box">
+            <div
+                class="time-number"
+                id="days">
+                0
+            </div>
+
+            <div class="time-label">
+                DAYS
+            </div>
+        </div>
+
+        <div class="time-box">
+            <div
+                class="time-number"
+                id="hours">
+                0
+            </div>
+
+            <div class="time-label">
+                HOURS
+            </div>
+        </div>
+
+        <div class="time-box">
+            <div
+                class="time-number"
+                id="minutes">
+                0
+            </div>
+
+            <div class="time-label">
+                MINUTES
+            </div>
+        </div>
+
+        <div class="time-box">
+            <div
+                class="time-number"
+                id="seconds">
+                0
+            </div>
+
+            <div class="time-label">
+                SECONDS
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+STORY
+========================= -->
+
+<section class="story">
+
+<div class="container reveal">
+
+    <div class="small-title">
+        OUR STORY
+    </div>
+
+    <div class="section-title">
+        A Journey Together
+    </div>
+
+    <div class="story-content">
+
+        Setiap pertemuan memiliki cerita.
+        Setiap cerita memiliki perjalanan.
+        Dan perjalanan kami membawa kami
+        sampai pada hari yang istimewa ini.
+
+        <div class="story-line"></div>
+
+        Dengan penuh rasa syukur,
+        kami akan memulai perjalanan baru
+        sebagai dua insan yang memilih
+        untuk berjalan bersama.
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+GALLERY
+========================= -->
+
+<section class="gallery">
+
+<div class="container reveal">
+
+    <div class="small-title">
+        OUR MOMENTS
+    </div>
+
+    <div class="section-title">
+        Gallery
+    </div>
+
+</div>
+
+<div class="gallery-grid">
+
+    <div class="gallery-item reveal left">
+        <img src="gallery1.jpg">
+    </div>
+
+    <div class="gallery-item reveal">
+        <img src="gallery2.jpg">
+    </div>
+
+    <div class="gallery-item reveal right">
+        <img src="gallery3.jpg">
+    </div>
+
+    <div class="gallery-item reveal left">
+        <img src="gallery4.jpg">
+    </div>
+
+    <div class="gallery-item reveal">
+        <img src="gallery5.jpg">
+    </div>
+
+    <div class="gallery-item reveal right">
+        <img src="gallery6.jpg">
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+EVENT
+========================= -->
+
+<section class="event">
+
+<div class="container">
+
+    <div class="reveal">
+
+        <div class="small-title">
+            SAVE THE DATE
+        </div>
+
+        <div class="section-title">
+            Wedding Event
+        </div>
+
+    </div>
+
+    <div class="event-grid">
+
+        <div class="event-card reveal left">
+
+            <div class="event-icon">
+                ♡
+            </div>
+
+            <h3>
+                Akad Nikah
+            </h3>
+
+            <p>
+                Minggu<br>
+                20 Desember 2026<br>
+                09.00 WIB
+                <br><br>
+                Gedung Pernikahan<br>
+                Jakarta
+            </p>
+
+            <a
+                class="location-btn"
+                href="https://maps.google.com"
+                target="_blank">
+
+                ♧ &nbsp; LIHAT LOKASI
+
+            </a>
+
+        </div>
+
+
+        <div class="event-card reveal right">
+
+            <div class="event-icon">
+                ✧
+            </div>
+
+            <h3>
+                Resepsi
+            </h3>
+
+            <p>
+                Minggu<br>
+                20 Desember 2026<br>
+                11.00 - 14.00 WIB
+                <br><br>
+                Gedung Pernikahan<br>
+                Jakarta
+            </p>
+
+            <a
+                class="location-btn"
+                href="https://maps.google.com"
+                target="_blank">
+
+                ♧ &nbsp; LIHAT LOKASI
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+RSVP
+========================= -->
+
+<section
+    class="rsvp"
+    id="rsvp">
+
+<div class="container">
+
+    <div class="rsvp-head reveal">
+
+        <div class="small-title">
+            RSVP & WISHES
+        </div>
+
+        <div class="section-title">
+            RSVP & WISHES
+        </div>
+
+        <div class="rsvp-description">
+            Sampaikan ucapan hangat, doa, dan harapan untuk
+            kedua mempelai, serta konfirmasi kehadiran Anda.
+        </div>
+
+    </div>
+
+
+    <div class="rsvp-step reveal">
+
+        <div class="step-circle">
+            2
+        </div>
+
+        <div class="step-text">
+            Ucapan
+        </div>
+
+    </div>
+
+
+    <div class="rsvp-form">
+
+        <div class="form-group reveal left">
+
+            <label class="form-label">
+                Nama Anda
+            </label>
+
+            <input
+                class="form-input"
+                id="guestName"
+                type="text"
+                placeholder="Nama Lengkap">
+
+        </div>
+
+
+        <div class="form-group reveal right">
+
+            <div class="attendance-label">
+                Konfirmasi Kehadiran
+            </div>
+
+            <div class="attendance">
+
+                <button
+                    type="button"
+                    onclick="selectAttendance(this,'Hadir')">
+
+                    Hadir
+
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectAttendance(this,'Masih Ragu')">
+
+                    Masih Ragu
+
+                </button>
+
+                <button
+                    type="button"
+                    onclick="selectAttendance(this,'Tidak Hadir')">
+
+                    Tidak Hadir
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-group reveal left">
+
+            <label class="form-label">
+                Tulis Ucapan
+            </label>
+
+            <textarea
+                class="form-textarea"
+                id="guestMessage"
+                placeholder="Tulis Ucapan & Doa Terbaikmu"></textarea>
+
+        </div>
+
+
+        <div class="form-group reveal right">
+
+            <button
+                type="button"
+                class="sticker-btn"
+                onclick="chooseSticker()">
+
+                ☺ &nbsp; Pilih Stiker
+
+            </button>
+
+        </div>
+
+
+        <div class="form-group reveal">
+
+            <button
+                type="button"
+                class="send-btn"
+                onclick="sendRSVP()">
+
+                Kirim
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+GIFT
+========================= -->
+
+<section class="gift">
+
+<div class="container reveal">
+
+    <div class="small-title">
+        WEDDING GIFT
+    </div>
+
+    <div class="section-title">
+        Sending Love
+    </div>
+
+    <div class="gift-card">
+
+        <h3>
+            🎁 Digital Gift
+        </h3>
+
+        <p>
+            BCA<br>
+            1234567890<br>
+            DEWI OKTAVIA
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+FOOTER
+========================= -->
+
+<footer>
+
+<div class="reveal">
+
+    <h2>
+        Dewi & Panji
+    </h2>
+
+    <p>
+        Thank you for being part of our special day.
+    </p>
+
+</div>
+
+</footer>
+
+
+<!-- =========================
+MUSIC
+========================= -->
+
+<audio
+    id="music"
+    loop
+    preload="auto">
+
+    <source
+        src="musik.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+<button
+    class="music-btn"
+    id="musicBtn"
+    onclick="toggleMusic()">
+
+    ♪
+
+</button>
+
+
+<!-- =========================
+LIGHTBOX
+========================= -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+    onclick="closeLightbox()">
+
+    <div class="lightbox-close">
+        ×
+    </div>
+
+    <img
+        id="lightboxImg"
+        src="">
+
+</div>
+
+
+<!-- ======================================================
+ADMIN TRIGGER
+TIDAK TERLIHAT
+5X TAP POJOK KANAN ATAS
+====================================================== -->
+
+<div
+    class="admin-trigger"
+    id="adminTrigger">
+</div>
+
+
+<!-- =========================
+ADMIN PANEL
+========================= -->
+
+<div
+    class="admin-panel"
+    id="adminPanel">
+
+    <div class="admin-box">
+
+        <div
+            class="admin-close"
+            onclick="closeAdmin()">
+
+            ×
+
+        </div>
+
+        <h2>
+            Admin Panel
+        </h2>
+
+
+        <label>
+            Ganti Video Background
+        </label>
+
+        <input
+            type="file"
+            accept="video/*"
+            onchange="changeVideo(this)">
+
+
+        <label>
+            Ganti Musik
+        </label>
+
+        <input
+            type="file"
+            accept="audio/*"
+            onchange="changeMusic(this)">
+
+
+        <label>
+            Foto Dewi 1
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeImage(this,'dewi1')">
+
+
+        <label>
+            Foto Dewi 2
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeImage(this,'dewi2')">
+
+
+        <label>
+            Foto Panji 1
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeImage(this,'panji1')">
+
+
+        <label>
+            Foto Panji 2
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeImage(this,'panji2')">
+
+
+        <label>
+            Gallery 1
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeGallery(this,1)">
+
+
+        <label>
+            Gallery 2
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeGallery(this,2)">
+
+
+        <label>
+            Gallery 3
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeGallery(this,3)">
+
+
+        <label>
+            Gallery 4
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeGallery(this,4)">
+
+
+        <label>
+            Gallery 5
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeGallery(this,5)">
+
+
+        <label>
+            Gallery 6
+        </label>
+
+        <input
+            type="file"
+            accept="image/*"
+            onchange="changeGallery(this,6)">
+
+
+        <button
+            class="admin-save"
+            onclick="closeAdmin()">
+
+            SIMPAN & TUTUP
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+OPEN INVITATION
+========================================================= */
+
+function openInvitation(){
+
+    var opening =
+        document.getElementById("opening");
+
+    var hero =
+        document.querySelector(".hero");
+
+    opening.classList.add("hide");
+
+    setTimeout(function(){
+
+        hero.classList.add("show");
+
+        revealElements();
+
+    },650);
+
+
+    var music =
+        document.getElementById("music");
+
+    music.play().then(function(){
+
+        document
+        .getElementById("musicBtn")
+        .classList.add("playing");
+
+    }).catch(function(){
+
+        console.log("Audio menunggu izin browser.");
+
+    });
+
+}
+
+
+/* =========================================================
+MUSIC
+========================================================= */
+
+function toggleMusic(){
+
+    var music =
+        document.getElementById("music");
+
+    var btn =
+        document.getElementById("musicBtn");
+
+    if(music.paused){
+
+        music.play();
+
+        btn.classList.add("playing");
+
+    }else{
+
+        music.pause();
+
+        btn.classList.remove("playing");
+
+    }
+
+}
+
+
+/* =========================================================
+COUNTDOWN
+========================================================= */
+
+var weddingDate =
+    new Date(
+        "December 20, 2026 09:00:00"
+    ).getTime();
+
+function updateCountdown(){
+
+    var now =
+        new Date().getTime();
+
+    var distance =
+        weddingDate - now;
+
+    if(distance < 0){
+        distance = 0;
+    }
+
+    var days =
+        Math.floor(
+            distance /
+            (1000*60*60*24)
+        );
+
+    var hours =
+        Math.floor(
+            (distance %
+            (1000*60*60*24)) /
+            (1000*60*60)
+        );
+
+    var minutes =
+        Math.floor(
+            (distance %
+            (1000*60*60)) /
+            (1000*60)
+        );
+
+    var seconds =
+        Math.floor(
+            (distance %
+            (1000*60)) /
+            1000
+        );
+
+    document.getElementById("days")
+        .innerHTML = days;
+
+    document.getElementById("hours")
+        .innerHTML = hours;
+
+    document.getElementById("minutes")
+        .innerHTML = minutes;
+
+    document.getElementById("seconds")
+        .innerHTML = seconds;
+
+}
+
+setInterval(
+    updateCountdown,
+    1000
+);
+
+updateCountdown();
+
+
+/* =========================================================
+COUPLE SLIDE
+========================================================= */
+
+var dewiIndex = 0;
+var panjiIndex = 0;
+
+function slideCouple(){
+
+    var dewi =
+        document.querySelectorAll(
+            ".person:nth-child(1) .couple-photo"
+        );
+
+    var panji =
+        document.querySelectorAll(
+            ".person:nth-child(3) .couple-photo"
+        );
+
+    for(var i=0;i<dewi.length;i++){
+        dewi[i]
+        .classList
+        .remove("active");
+    }
+
+    for(var j=0;j<panji.length;j++){
+        panji[j]
+        .classList
+        .remove("active");
+    }
+
+    dewiIndex++;
+
+    panjiIndex++;
+
+    if(dewiIndex >= dewi.length){
+        dewiIndex = 0;
+    }
+
+    if(panjiIndex >= panji.length){
+        panjiIndex = 0;
+    }
+
+    if(dewi[dewiIndex]){
+        dewi[dewiIndex]
+        .classList
+        .add("active");
+    }
+
+    if(panji[panjiIndex]){
+        panji[panjiIndex]
+        .classList
+        .add("active");
+    }
+
+}
+
+setInterval(
+    slideCouple,
+    3500
+);
+
+
+/* =========================================================
+SCROLL FADE + SLIDE
+========================================================= */
+
+function revealElements(){
+
+    var elements =
+        document.getElementsByClassName(
+            "reveal"
+        );
+
+    var screen =
+        window.innerHeight;
+
+    for(var i=0;i<elements.length;i++){
+
+        var rect =
+            elements[i]
+            .getBoundingClientRect();
+
+        var top =
+            rect.top;
+
+        var bottom =
+            rect.bottom;
+
+        if(
+            top < screen*.88 &&
+            bottom > screen*.12
+        ){
+
+            elements[i]
+            .classList
+            .add("visible");
+
+        }else{
+
+            elements[i]
+            .classList
+            .remove("visible");
+
+        }
+
+    }
+
+}
+
+window.addEventListener(
+    "scroll",
+    revealElements
+);
+
+window.addEventListener(
+    "load",
+    revealElements
+);
+
+setTimeout(
+    revealElements,
+    500
+);
+
+
+/* =========================================================
+RSVP
+========================================================= */
+
+var selectedAttendance = "";
+
+function selectAttendance(
+    button,
+    status
+){
+
+    var buttons =
+        document.querySelectorAll(
+            ".attendance button"
+        );
+
+    for(var i=0;i<buttons.length;i++){
+
+        buttons[i]
+        .classList
+        .remove("active");
+
+    }
+
+    button
+    .classList
+    .add("active");
+
+    selectedAttendance =
+        status;
+
+}
+
+
+function chooseSticker(){
+
+    var stickers = [
+        "❤️",
+        "🥰",
+        "💐",
+        "🎉",
+        "💍",
+        "✨",
+        "🤍"
+    ];
+
+    var selected =
+        stickers[
+            Math.floor(
+                Math.random() *
+                stickers.length
+            )
+        ];
+
+    var textarea =
+        document.getElementById(
+            "guestMessage"
+        );
+
+    textarea.value +=
+        " " + selected;
+
+}
+
+
+function sendRSVP(){
+
+    var name =
+        document
+        .getElementById(
+            "guestName"
+        )
+        .value
+        .trim();
+
+    var message =
+        document
+        .getElementById(
+            "guestMessage"
+        )
+        .value
+        .trim();
+
+    if(name === ""){
+
+        alert(
+            "Silakan isi nama terlebih dahulu."
+        );
+
+        return;
+    }
+
+    if(selectedAttendance === ""){
+
+        alert(
+            "Silakan pilih konfirmasi kehadiran."
+        );
+
+        return;
+    }
+
+    if(message === ""){
+
+        alert(
+            "Silakan tulis ucapan terlebih dahulu."
+        );
+
+        return;
+    }
+
+   var text =
+    "Halo Dewi & Panji,\n\n" +
+    "Nama: " +
+    name +
+    "\n" +
+    "Kehadiran: " +
+    selectedAttendance +
+    "\n" +
+    "Ucapan: " +
+    message;
+
+var whatsapp =
+    "https://wa.me/6287858019414?text=" +
+    encodeURIComponent(text);
+
+window.open(
+    whatsapp,
+    "_blank"
+);
+
+    window.open(
+        whatsapp,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+GALLERY LIGHTBOX
+========================================================= */
+
+var galleryItems =
+    document.querySelectorAll(
+        ".gallery-item"
+    );
+
+for(var i=0;i<galleryItems.length;i++){
+
+    galleryItems[i].onclick =
+        function(){
+
+            var img =
+                this.getElementsByTagName(
+                    "img"
+                )[0];
+
+            document
+            .getElementById(
+                "lightboxImg"
+            )
+            .src =
+                img.src;
+
+            document
+            .getElementById(
+                "lightbox"
+            )
+            .classList
+            .add("show");
+
+        };
+
+}
+
+function closeLightbox(){
+
+    document
+    .getElementById(
+        "lightbox"
+    )
+    .classList
+    .remove("show");
+
+}
+
+
+/* =========================================================
+HIDDEN ADMIN
+5X TAP POJOK KANAN ATAS
+========================================================= */
+
+var adminClicks = 0;
+var adminTimer = null;
+
+var adminTrigger =
+    document.getElementById(
+        "adminTrigger"
+    );
+
+adminTrigger.addEventListener(
+    "click",
+    function(){
+
+        adminClicks++;
+
+        clearTimeout(
+            adminTimer
+        );
+
+        adminTimer =
+            setTimeout(
+                function(){
+
+                    adminClicks = 0;
+
+                },
+                1500
+            );
+
+        if(adminClicks >= 5){
+
+            adminClicks = 0;
+
+            openAdmin();
+
+        }
+
+    }
+);
+
+
+function openAdmin(){
+
+    document
+    .getElementById(
+        "adminPanel"
+    )
+    .classList
+    .add("show");
+
+}
+
+
+function closeAdmin(){
+
+    document
+    .getElementById(
+        "adminPanel"
+    )
+    .classList
+    .remove("show");
+
+}
+
+
+/* =========================================================
+CHANGE VIDEO
+========================================================= */
+
+function changeVideo(input){
+
+    if(
+        !input.files ||
+        !input.files[0]
+    ){
+        return;
+    }
+
+    var url =
+        URL.createObjectURL(
+            input.files[0]
+        );
+
+    var video =
+        document.getElementById(
+            "pageVideo"
+        );
+
+    video.src = url;
+
+    video.load();
+
+    video.play().catch(
+        function(){}
+    );
+
+}
+
+
+/* =========================================================
+CHANGE MUSIC
+========================================================= */
+
+function changeMusic(input){
+
+    if(
+        !input.files ||
+        !input.files[0]
+    ){
+        return;
+    }
+
+    var url =
+        URL.createObjectURL(
+            input.files[0]
+        );
+
+    var music =
+        document.getElementById(
+            "music"
+        );
+
+    music.src = url;
+
+    music.load();
+
+    music.play().catch(
+        function(){}
+    );
+
+}
+
+
+/* =========================================================
+CHANGE COUPLE IMAGE
+========================================================= */
+
+function changeImage(
+    input,
+    id
+){
+
+    if(
+        !input.files ||
+        !input.files[0]
+    ){
+        return;
+    }
+
+    var reader =
+        new FileReader();
+
+    reader.onload =
+        function(e){
+
+            var image =
+                document.getElementById(
+                    id
+                );
+
+            if(image){
+
+                image.src =
+                    e.target.result;
+
+            }
+
+        };
+
+    reader.readAsDataURL(
+        input.files[0]
+    );
+
+}
+
+
+/* =========================================================
+CHANGE GALLERY
+========================================================= */
+
+function changeGallery(
+    input,
+    number
+){
+
+    if(
+        !input.files ||
+        !input.files[0]
+    ){
+        return;
+    }
+
+    var reader =
+        new FileReader();
+
+    reader.onload =
+        function(e){
+
+            var gallery =
+                document.querySelectorAll(
+                    ".gallery-item img"
+                );
+
+            if(
+                gallery[number-1]
+            ){
+
+                gallery[number-1].src =
+                    e.target.result;
+
+            }
+
+        };
+
+    reader.readAsDataURL(
+        input.files[0]
+    );
+
+}
+
+</script>
+
+
+<!-- ======================================================
+ADMIN ACCESS KEY (tambahan — tidak mengubah script lain)
+====================================================== -->
+
+<style>
+.key-gate{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.94);
+    z-index:100002;
+    padding:20px;
+}
+.key-gate.show{display:flex;}
+.key-box{
+    width:min(380px,100%);
+    background:#15120d;
+    border:1px solid #bd9140;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+}
+.key-box h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    font-weight:500;
+    margin-bottom:6px;
+}
+.key-box p{
+    font-size:11px;
+    color:rgba(255,255,255,.65);
+    margin-bottom:16px;
+}
+.key-box input{
+    width:100%;
+    padding:12px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:7px;
+    background:#242018;
+    color:#fff;
+    text-align:center;
+    letter-spacing:2px;
+}
+.key-error{
+    min-height:16px;
+    margin-top:10px;
+    font-size:11px;
+    color:#ff7b7b;
+}
+.key-actions{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+}
+.key-actions button{
+    flex:1;
+    padding:12px;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+    border:1px solid #c99d4a;
+}
+.key-ok{background:#c99d4a;color:#111;}
+.key-cancel{background:transparent;color:#c99d4a;}
+</style>
+
+<div class="key-gate" id="keyGate">
+    <div class="key-box">
+        <h3>Akses Admin</h3>
+        <p>Masukkan access key untuk membuka panel.</p>
+        <input type="password" id="keyInput" placeholder="Access key" autocomplete="off">
+        <div class="key-error" id="keyError"></div>
+        <div class="key-actions">
+            <button class="key-cancel" id="keyCancel" type="button">BATAL</button>
+            <button class="key-ok" id="keyOk" type="button">MASUK</button>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+
+    /* GANTI KEY DI SINI */
+    var ACCESS_KEY = "DewiPanji";
+
+    var originalOpenAdmin = window.openAdmin;
+    var gate   = document.getElementById("keyGate");
+    var input  = document.getElementById("keyInput");
+    var error  = document.getElementById("keyError");
+    var unlocked = false;
+
+    function showGate(){
+        input.value = "";
+        error.textContent = "";
+        gate.classList.add("show");
+        setTimeout(function(){ input.focus(); }, 50);
+    }
+
+    function hideGate(){
+        gate.classList.remove("show");
+    }
+
+    function submitKey(){
+        if(input.value === ACCESS_KEY){
+            unlocked = true;
+            hideGate();
+            originalOpenAdmin();
+        }else{
+            error.textContent = "Access key salah.";
+            input.value = "";
+            input.focus();
+        }
+    }
+
+    /* openAdmin dipanggil lewat nama global oleh trigger 5x tap,
+       jadi cukup ditimpa di sini tanpa menyentuh script asli */
+    window.openAdmin = function(){
+        if(unlocked){
+            originalOpenAdmin();
+        }else{
+            showGate();
+        }
+    };
+
+    /* kunci lagi saat panel ditutup */
+    var originalCloseAdmin = window.closeAdmin;
+    window.closeAdmin = function(){
+        unlocked = false;
+        originalCloseAdmin();
+    };
+
+    document.getElementById("keyOk").addEventListener("click", submitKey);
+    document.getElementById("keyCancel").addEventListener("click", hideGate);
+    input.addEventListener("keydown", function(e){
+        if(e.key === "Enter"){ submitKey(); }
+    });
+
+})();
+</script>
+
+
+<!-- ======================================================
+FIREBASE (tambahan — tidak mengubah script lain)
+Script Firebase ada di kode ini. Semua key diisi lewat panel admin.
+====================================================== -->
+
+<style>
+.fb-section{
+    margin-top:25px;
+    padding-top:5px;
+    border-top:1px solid rgba(189,145,64,.4);
+}
+.fb-section h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:24px;
+    font-weight:500;
+    margin-top:18px;
+}
+.fb-section textarea{
+    width:100%;
+    min-height:90px;
+    padding:12px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:7px;
+    background:#242018;
+    color:#fff;
+    font-size:11px;
+    font-family:monospace;
+    resize:vertical;
+}
+.fb-btn{
+    width:100%;
+    padding:12px;
+    margin-top:14px;
+    background:transparent;
+    color:#c99d4a;
+    border:1px solid #c99d4a;
+    border-radius:8px;
+    font-weight:700;
+    cursor:pointer;
+}
+.fb-btn.main{
+    background:#c99d4a;
+    color:#111;
+}
+.fb-status{
+    min-height:16px;
+    margin-top:8px;
+    font-size:11px;
+    color:#8fe39b;
+}
+</style>
+
+<script>
+(function(){
+
+    /* =====================================================
+       DEFAULT CONFIG (opsional)
+       Boleh dibiarkan kosong — isi lewat panel admin.
+       Kalau diisi di sini, nilai ini dipakai semua pengunjung.
+    ===================================================== */
+    var FIREBASE_CONFIG = {
+        apiKey: "",
+        authDomain: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: ""
+    };
+
+    var FIELDS = [
+        ["apiKey","API Key"],
+        ["authDomain","Auth Domain"],
+        ["projectId","Project ID"],
+        ["storageBucket","Storage Bucket"],
+        ["messagingSenderId","Messaging Sender ID"],
+        ["appId","App ID"]
+    ];
+
+    var SDK_VERSION = "10.12.2";
+    var STORE_KEY   = "firebaseConfig";
+
+    function loadSaved(){
+        try{
+            return JSON.parse(localStorage.getItem(STORE_KEY)) || {};
+        }catch(e){
+            return {};
+        }
+    }
+
+    function getConfig(){
+        var saved = loadSaved();
+        var cfg = {};
+        for(var i=0;i<FIELDS.length;i++){
+            var k = FIELDS[i][0];
+            cfg[k] = saved[k] || FIREBASE_CONFIG[k] || "";
+        }
+        return cfg;
+    }
+
+    function loadScript(src, done){
+        var s = document.createElement("script");
+        s.src = src;
+        s.onload = done;
+        s.onerror = function(){ console.warn("Gagal memuat " + src); };
+        document.head.appendChild(s);
+    }
+
+    var started = false;
+
+    function initFirebase(){
+        if(started){ return true; }
+
+        var cfg = getConfig();
+        if(!cfg.apiKey || !cfg.projectId){ return false; }
+
+        started = true;
+
+        var base = "https://www.gstatic.com/firebasejs/" + SDK_VERSION + "/";
+
+        loadScript(base + "firebase-app-compat.js", function(){
+            loadScript(base + "firebase-firestore-compat.js", function(){
+
+                if(!firebase.apps.length){
+                    firebase.initializeApp(cfg);
+                }
+
+                /* dipakai script lain: window.firebaseDb */
+                window.firebaseDb = firebase.firestore();
+            });
+        });
+
+        return true;
+    }
+
+    initFirebase();
+
+    /* =====================================================
+       ADMIN PANEL — SEMUA KEY FIREBASE
+    ===================================================== */
+
+    var box = document.querySelector("#adminPanel .admin-box");
+    var btn = box.querySelector(".admin-save");
+
+    var wrap = document.createElement("div");
+    wrap.className = "fb-section";
+
+    var html =
+        "<h3>Firebase</h3>" +
+        "<label>Tempel Firebase Config (opsional, isi kolom otomatis)</label>" +
+        "<textarea id=\"fbPaste\" placeholder=\"const firebaseConfig = {\n  apiKey: '...',\n  authDomain: '...'\n};\"></textarea>" +
+        "<button type=\"button\" class=\"fb-btn\" id=\"fbParse\">ISI OTOMATIS DARI TEMPELAN</button>";
+
+    for(var i=0;i<FIELDS.length;i++){
+        html +=
+            "<label>" + FIELDS[i][1] + "</label>" +
+            "<input type=\"text\" id=\"fb_" + FIELDS[i][0] + "\" autocomplete=\"off\" autocapitalize=\"off\" spellcheck=\"false\">";
+    }
+
+    html +=
+        "<button type=\"button\" class=\"fb-btn main\" id=\"fbSave\">SIMPAN FIREBASE KEY</button>" +
+        "<div class=\"fb-status\" id=\"fbStatus\"></div>";
+
+    wrap.innerHTML = html;
+    box.insertBefore(wrap, btn);
+
+    var status = document.getElementById("fbStatus");
+
+    function fill(cfg){
+        for(var i=0;i<FIELDS.length;i++){
+            var k = FIELDS[i][0];
+            if(cfg[k] !== undefined){
+                document.getElementById("fb_" + k).value = cfg[k];
+            }
+        }
+    }
+
+    function showError(msg){
+        status.style.color = "#ff7b7b";
+        status.textContent = msg;
+    }
+
+    function showOk(msg){
+        status.style.color = "#8fe39b";
+        status.textContent = msg;
+    }
+
+    fill(getConfig());
+
+    document.getElementById("fbParse").addEventListener("click", function(){
+        var text = document.getElementById("fbPaste").value;
+        var re = /["']?(\w+)["']?\s*:\s*["']([^"']*)["']/g;
+        var found = {}, m, count = 0;
+
+        while((m = re.exec(text)) !== null){
+            for(var i=0;i<FIELDS.length;i++){
+                if(FIELDS[i][0] === m[1]){
+                    found[m[1]] = m[2];
+                    count++;
+                }
+            }
+        }
+
+        if(count === 0){
+            showError("Config tidak terbaca. Pastikan formatnya key: \"nilai\".");
+            return;
+        }
+
+        fill(found);
+        showOk(count + " kolom terisi. Klik Simpan.");
+    });
+
+    document.getElementById("fbSave").addEventListener("click", function(){
+        var cfg = {};
+
+        for(var i=0;i<FIELDS.length;i++){
+            var k = FIELDS[i][0];
+            var v = document.getElementById("fb_" + k).value.trim();
+            if(v !== ""){ cfg[k] = v; }
+        }
+
+        if(!cfg.apiKey || !cfg.projectId){
+            showError("API Key dan Project ID wajib diisi.");
+            return;
+        }
+
+        try{
+            localStorage.setItem(STORE_KEY, JSON.stringify(cfg));
+        }catch(e){
+            showError("Gagal menyimpan (penyimpanan browser diblokir).");
+            return;
+        }
+
+        if(started){
+            showOk("Tersimpan. Muat ulang halaman agar key baru dipakai.");
+        }else{
+            initFirebase();
+            showOk("Tersimpan dan Firebase dijalankan.");
+        }
+    });
+
+})();
+</script>
+
+</body>
+</html>
