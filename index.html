@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Dewi & Panji — Wedding Invitation</title>
+<title>Aulia & Rangga — Wedding Invitation</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1415,9 +1415,9 @@ OPENING
         </div>
 
         <h1>
-            Dewi
+            Aulia
             <span>&</span>
-            Panji
+            Rangga
         </h1>
 
         <div class="opening-date">
@@ -1454,9 +1454,9 @@ HERO
         </div>
 
         <h1>
-            Dewi
+            Aulia
             <span>&</span>
-            Panji
+            Rangga
         </h1>
 
         <div class="hero-line"></div>
@@ -1503,18 +1503,18 @@ COUPLE
 
                 <img
                     class="couple-photo active"
-                    src="dewi1.jpg"
-                    id="dewi1">
+                    src="aulia1.jpg"
+                    id="aulia1">
 
                 <img
                     class="couple-photo"
-                    src="dewi2.jpg"
-                    id="dewi2">
+                    src="aulia2.jpg"
+                    id="aulia2">
 
             </div>
 
             <h3>
-                Dewi oktavia
+                Aulia Putri
             </h3>
 
             <p>
@@ -1535,18 +1535,18 @@ COUPLE
 
                 <img
                     class="couple-photo active"
-                    src="panji1.jpg"
-                    id="panji1">
+                    src="rangga1.jpg"
+                    id="rangga1">
 
                 <img
                     class="couple-photo"
-                    src="panji2.jpg"
-                    id="panji2">
+                    src="rangga2.jpg"
+                    id="rangga2">
 
             </div>
 
             <h3>
-                Panji Ahmadien
+                Rangga Pratama
             </h3>
 
             <p>
@@ -1979,7 +1979,7 @@ GIFT
         <p>
             BCA<br>
             1234567890<br>
-            DEWI OKTAVIA
+            AULIA PUTRI
         </p>
 
     </div>
@@ -1998,7 +1998,7 @@ FOOTER
 <div class="reveal">
 
     <h2>
-        Dewi & Panji
+        Aulia & Rangga
     </h2>
 
     <p>
@@ -2111,43 +2111,43 @@ ADMIN PANEL
 
 
         <label>
-            Foto Dewi 1
+            Foto Aulia 1
         </label>
 
         <input
             type="file"
             accept="image/*"
-            onchange="changeImage(this,'dewi1')">
+            onchange="changeImage(this,'aulia1')">
 
 
         <label>
-            Foto Dewi 2
+            Foto Aulia 2
         </label>
 
         <input
             type="file"
             accept="image/*"
-            onchange="changeImage(this,'dewi2')">
+            onchange="changeImage(this,'aulia2')">
 
 
         <label>
-            Foto Panji 1
+            Foto Rangga 1
         </label>
 
         <input
             type="file"
             accept="image/*"
-            onchange="changeImage(this,'panji1')">
+            onchange="changeImage(this,'rangga1')">
 
 
         <label>
-            Foto Panji 2
+            Foto Rangga 2
         </label>
 
         <input
             type="file"
             accept="image/*"
-            onchange="changeImage(this,'panji2')">
+            onchange="changeImage(this,'rangga2')">
 
 
         <label>
@@ -2369,53 +2369,53 @@ updateCountdown();
 COUPLE SLIDE
 ========================================================= */
 
-var dewiIndex = 0;
-var panjiIndex = 0;
+var auliaIndex = 0;
+var ranggaIndex = 0;
 
 function slideCouple(){
 
-    var dewi =
+    var aulia =
         document.querySelectorAll(
             ".person:nth-child(1) .couple-photo"
         );
 
-    var panji =
+    var rangga =
         document.querySelectorAll(
             ".person:nth-child(3) .couple-photo"
         );
 
-    for(var i=0;i<dewi.length;i++){
-        dewi[i]
+    for(var i=0;i<aulia.length;i++){
+        aulia[i]
         .classList
         .remove("active");
     }
 
-    for(var j=0;j<panji.length;j++){
-        panji[j]
+    for(var j=0;j<rangga.length;j++){
+        rangga[j]
         .classList
         .remove("active");
     }
 
-    dewiIndex++;
+    auliaIndex++;
 
-    panjiIndex++;
+    ranggaIndex++;
 
-    if(dewiIndex >= dewi.length){
-        dewiIndex = 0;
+    if(auliaIndex >= aulia.length){
+        auliaIndex = 0;
     }
 
-    if(panjiIndex >= panji.length){
-        panjiIndex = 0;
+    if(ranggaIndex >= rangga.length){
+        ranggaIndex = 0;
     }
 
-    if(dewi[dewiIndex]){
-        dewi[dewiIndex]
+    if(aulia[auliaIndex]){
+        aulia[auliaIndex]
         .classList
         .add("active");
     }
 
-    if(panji[panjiIndex]){
-        panji[panjiIndex]
+    if(rangga[ranggaIndex]){
+        rangga[ranggaIndex]
         .classList
         .add("active");
     }
@@ -2990,7 +2990,7 @@ ADMIN ACCESS KEY (tambahan — tidak mengubah script lain)
 (function(){
 
     /* GANTI KEY DI SINI */
-    var ACCESS_KEY = "DewiPanji";
+    var ACCESS_KEY = "AuliaRangga2026";
 
     var originalOpenAdmin = window.openAdmin;
     var gate   = document.getElementById("keyGate");
@@ -3109,12 +3109,12 @@ Script Firebase ada di kode ini. Semua key diisi lewat panel admin.
        Kalau diisi di sini, nilai ini dipakai semua pengunjung.
     ===================================================== */
     var FIREBASE_CONFIG = {
-        apiKey: "",
-        authDomain: "",
-        projectId: "",
-        storageBucket: "",
-        messagingSenderId: "",
-        appId: ""
+        apiKey: "AIzaSyCuX2DNMryClcL-9pLU86uRUWKV3bJ6-FE",
+        authDomain: "weding-dewi.firebaseapp.com",
+        projectId: "weding-dewi",
+        storageBucket: "weding-dewi.firebasestorage.app",
+        messagingSenderId: "891582122979",
+        appId: "1:891582122979:web:7ae0722ef409413c3c2ed6"
     };
 
     var FIELDS = [
@@ -3176,6 +3176,7 @@ Script Firebase ada di kode ini. Semua key diisi lewat panel admin.
 
                 /* dipakai script lain: window.firebaseDb */
                 window.firebaseDb = firebase.firestore();
+                document.dispatchEvent(new Event("firebase-ready"));
             });
         });
 
@@ -3291,5 +3292,202 @@ Script Firebase ada di kode ini. Semua key diisi lewat panel admin.
 })();
 </script>
 
+
+<!-- ======================================================
+UCAPAN TAMU + FIRESTORE (tambahan — tidak mengubah script lain)
+Menyimpan ucapan ke Firestore dan menampilkannya di bawah form RSVP.
+====================================================== -->
+
+<style>
+.wishes{
+    width:min(590px,100%);
+    margin:50px auto 0;
+}
+.wishes-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:32px;
+    font-weight:500;
+    text-align:center;
+    margin-bottom:18px;
+}
+.wishes-list{
+    max-height:430px;
+    overflow-y:auto;
+    padding-right:4px;
+}
+.wish-item{
+    background:rgba(220,214,193,.18);
+    border:1px solid rgba(213,170,79,.25);
+    border-radius:13px;
+    padding:14px 16px;
+    margin-bottom:10px;
+}
+.wish-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:6px;
+}
+.wish-name{
+    font-size:14px;
+    font-weight:600;
+    word-break:break-word;
+}
+.wish-badge{
+    flex-shrink:0;
+    font-size:9px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#d8b568;
+    border:1px solid rgba(216,181,104,.55);
+    border-radius:20px;
+    padding:3px 9px;
+}
+.wish-msg{
+    font-size:13px;
+    line-height:1.7;
+    color:rgba(255,255,255,.86);
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+.wish-time{
+    margin-top:6px;
+    font-size:10px;
+    opacity:.55;
+}
+.wishes-empty{
+    text-align:center;
+    font-size:12px;
+    opacity:.65;
+    padding:18px 0;
+}
+</style>
+
+<script>
+(function(){
+
+    var COLLECTION = "ucapan";
+    var subscribed = false;
+
+    /* ---------- tampilan daftar ucapan ---------- */
+
+    var container = document.querySelector("#rsvp .container");
+    var form = container.querySelector(".rsvp-form");
+
+    var wrap = document.createElement("div");
+    wrap.className = "wishes";
+    wrap.innerHTML =
+        "<div class=\"wishes-title\">Ucapan Tamu</div>" +
+        "<div class=\"wishes-list\" id=\"wishesList\">" +
+            "<div class=\"wishes-empty\">Memuat ucapan...</div>" +
+        "</div>";
+    form.parentNode.insertBefore(wrap, form.nextSibling);
+
+    var listEl = document.getElementById("wishesList");
+
+    function formatTime(ts){
+        if(!ts || !ts.toDate){ return "Baru saja"; }
+        return ts.toDate().toLocaleString("id-ID", {
+            day:"numeric", month:"long", year:"numeric",
+            hour:"2-digit", minute:"2-digit"
+        });
+    }
+
+    function render(snapshot){
+        listEl.innerHTML = "";
+
+        if(snapshot.empty){
+            listEl.innerHTML = "<div class=\"wishes-empty\">Belum ada ucapan. Jadilah yang pertama!</div>";
+            return;
+        }
+
+        snapshot.forEach(function(doc){
+            var d = doc.data();
+
+            var item  = document.createElement("div");
+            item.className = "wish-item";
+
+            var top   = document.createElement("div");
+            top.className = "wish-top";
+
+            var name  = document.createElement("div");
+            name.className = "wish-name";
+            name.textContent = d.nama || "Tamu";
+
+            var badge = document.createElement("div");
+            badge.className = "wish-badge";
+            badge.textContent = d.kehadiran || "";
+
+            top.appendChild(name);
+            if(d.kehadiran){ top.appendChild(badge); }
+
+            var msg   = document.createElement("div");
+            msg.className = "wish-msg";
+            msg.textContent = d.pesan || "";
+
+            var time  = document.createElement("div");
+            time.className = "wish-time";
+            time.textContent = formatTime(d.waktu);
+
+            item.appendChild(top);
+            item.appendChild(msg);
+            item.appendChild(time);
+            listEl.appendChild(item);
+        });
+    }
+
+    function subscribe(){
+        if(subscribed || !window.firebaseDb){ return; }
+        subscribed = true;
+
+        window.firebaseDb
+            .collection(COLLECTION)
+            .orderBy("waktu","desc")
+            .limit(50)
+            .onSnapshot(
+                render,
+                function(err){
+                    console.warn("Gagal membaca ucapan:", err);
+                    listEl.innerHTML = "<div class=\"wishes-empty\">Ucapan belum bisa ditampilkan.</div>";
+                }
+            );
+    }
+
+    document.addEventListener("firebase-ready", subscribe);
+    subscribe();
+
+    /* ---------- simpan ucapan saat tombol Kirim ---------- */
+
+    var originalSendRSVP = window.sendRSVP;
+
+    /* tombol Kirim memanggil sendRSVP() lewat nama global,
+       jadi cukup dibungkus di sini tanpa menyentuh script asli */
+    window.sendRSVP = function(){
+
+        var name    = document.getElementById("guestName").value.trim();
+        var message = document.getElementById("guestMessage").value.trim();
+        var status  = window.selectedAttendance;
+
+        var valid = name !== "" && status && message !== "";
+
+        /* alur asli (validasi + buka WhatsApp) tetap jalan */
+        originalSendRSVP();
+
+        if(valid && window.firebaseDb){
+            window.firebaseDb.collection(COLLECTION).add({
+                nama: name.slice(0,60),
+                kehadiran: status,
+                pesan: message.slice(0,500),
+                waktu: firebase.firestore.FieldValue.serverTimestamp()
+            }).catch(function(err){
+                console.warn("Gagal menyimpan ucapan:", err);
+            });
+        }
+    };
+
+})();
+</script>
+
 </body>
-</html>
+        </html>
