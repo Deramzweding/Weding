@@ -1756,7 +1756,8 @@ EVENT
             </p>
 
             <a
-                class="https://maps.app.goo.gl/pNLY2BJ8sfxDJ4kK9?g_st=ac"
+                class="location-btn"
+                href="https://maps.app.goo.gl/pNLY2BJ8sfxDJ4kK9?g_st=ac"
                 target="_blank">
 
                 ♧ &nbsp; LIHAT LOKASI
@@ -3970,5 +3971,207 @@ Ukuran bisa diubah di bagian CSS di bawah ini.
 
 </style>
 
+
+<!-- ======================================================
+CLOUDINARY UPLOAD (tambahan — tidak mengubah script lain)
+Foto dan musik dari panel admin diupload ke Cloudinary, lalu link-nya
+disimpan di Firestore (koleksi "foto") dan dimuat ulang otomatis.
+Dipasang paling akhir, jadi menggantikan fungsi panel admin yang lama
+lewat nama global (changeImage, changeGallery, changeBackground, changeMusic).
+====================================================== -->
+
+<script>
+(function(){
+
+    var CLOUD_NAME    = "q9xnrpmz";
+    var UPLOAD_PRESET = "Undangan";
+    var COLLECTION    = "foto";
+
+    var PHOTO_IDS = ["aulia1","aulia2","rangga1","rangga2","bg1","bg2","bg3"];
+
+    var toastEl = document.getElementById("fotoToast");
+    var toastTimer = null;
+
+    function toast(msg, isError){
+        if(!toastEl){ return; }
+        toastEl.textContent = msg;
+        toastEl.className = "foto-toast" + (isError ? " err" : "");
+        toastEl.style.display = "block";
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function(){
+            toastEl.style.display = "none";
+        }, 4000);
+    }
+
+    /* ---------- upload ke Cloudinary ---------- */
+
+    function uploadToCloudinary(file, type, done){
+        var form = new FormData();
+        form.append("file", file);
+        form.append("upload_preset", UPLOAD_PRESET);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://api.cloudinary.com/v1_1/" + CLOUD_NAME + "/" + type + "/upload");
+
+        xhr.upload.onprogress = function(e){
+            if(e.lengthComputable){
+                toast("Mengupload... " + Math.round(e.loaded / e.total * 100) + "%");
+            }
+        };
+
+        xhr.onload = function(){
+            var res = null;
+            try{ res = JSON.parse(xhr.responseText); }catch(err){}
+
+            if(xhr.status >= 200 && xhr.status < 300 && res && res.secure_url){
+                done(null, res.secure_url);
+            }else{
+                done((res && res.error && res.error.message) || "Upload gagal.");
+            }
+        };
+
+        xhr.onerror = function(){ done("Koneksi bermasalah."); };
+        xhr.send(form);
+    }
+
+    /* kecilkan + optimalkan gambar lewat URL Cloudinary */
+    function optimized(url, width){
+        return url.replace("/upload/", "/upload/f_auto,q_auto,w_" + width + "/");
+    }
+
+    /* simpan link ke Firestore (format sama seperti foto lama) */
+    function saveLink(docId, url, okMsg){
+        if(!window.firebaseDb){
+            toast("Firebase belum aktif, file hanya tampil sementara.", true);
+            return;
+        }
+
+        window.firebaseDb.collection(COLLECTION).doc(docId).set({
+            data: url,
+            token: window.ADMIN_ACCESS_KEY,
+            waktu: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(function(){
+            toast(okMsg);
+        }).catch(function(err){
+            console.warn("Gagal menyimpan link:", err);
+            toast("Terupload, tapi gagal menyimpan link. Cek Rules Firestore.", true);
+        });
+    }
+
+    function pickFile(input){
+        return (input && input.files && input.files[0]) ? input.files[0] : null;
+    }
+
+    function uploadPhoto(docId, file, width, targetImg){
+        toast("Mengupload foto...");
+
+        if(targetImg){
+            targetImg.src = URL.createObjectURL(file);   /* pratinjau langsung */
+        }
+
+        uploadToCloudinary(file, "image", function(err, url){
+            if(err){
+                toast("Gagal upload: " + err, true);
+                return;
+            }
+            saveLink(docId, optimized(url, width), "Foto tersimpan permanen.");
+        });
+    }
+
+    /* ---------- fungsi panel admin (menggantikan versi lama) ---------- */
+
+    window.changeImage = function(input, id){
+        var file = pickFile(input);
+        if(!file || PHOTO_IDS.indexOf(id) === -1){ return; }
+        uploadPhoto(id, file, 1000, document.getElementById(id));
+    };
+
+    window.changeBackground = function(input, number){
+        var file = pickFile(input);
+        if(!file){ return; }
+        uploadPhoto("bg" + number, file, 1600, document.getElementById("bg" + number));
+    };
+
+    window.changeGallery = function(input, number){
+        var file = pickFile(input);
+        if(!file){ return; }
+        var imgs = document.querySelectorAll(".gallery-item img");
+        uploadPhoto("gallery" + number, file, 1000, imgs[number - 1]);
+    };
+
+    window.changeMusic = function(input){
+        var file = pickFile(input);
+        if(!file){ return; }
+
+        toast("Mengupload musik...");
+
+        var music = document.getElementById("music");
+        music.src = URL.createObjectURL(file);
+        music.load();
+        music.play().catch(function(){});
+
+        /* audio di Cloudinary diupload lewat jalur "video" */
+        uploadToCloudinary(file, "video", function(err, url){
+            if(err){
+                toast("Gagal upload: " + err, true);
+                return;
+            }
+            saveLink("musik", url, "Musik tersimpan permanen.");
+        });
+    };
+
+    /* ---------- muat link tersimpan setiap halaman dibuka ---------- */
+
+    var loaded = false;
+
+    function loadMedia(){
+        if(loaded || !window.firebaseDb){ return; }
+        loaded = true;
+
+        window.firebaseDb.collection(COLLECTION).get().then(function(snapshot){
+
+            var galleryImgs = document.querySelectorAll(".gallery-item img");
+
+            snapshot.forEach(function(doc){
+                var url = doc.data().data;
+
+                if(typeof url !== "string" ||
+                   url.indexOf("https://res.cloudinary.com/" + CLOUD_NAME + "/") !== 0){
+                    return;
+                }
+
+                var g = /^gallery([1-9])$/.exec(doc.id);
+
+                if(g){
+                    var el = galleryImgs[parseInt(g[1], 10) - 1];
+                    if(el){ el.src = url; }
+
+                }else if(PHOTO_IDS.indexOf(doc.id) !== -1){
+                    var img = document.getElementById(doc.id);
+                    if(img){ img.src = url; }
+
+                }else if(doc.id === "musik"){
+                    var music = document.getElementById("music");
+                    if(music){
+                        var wasPlaying = !music.paused;
+                        music.src = url;
+                        music.load();
+                        if(wasPlaying){ music.play().catch(function(){}); }
+                    }
+                }
+            });
+
+        }).catch(function(err){
+            console.warn("Gagal memuat media:", err);
+        });
+    }
+
+    document.addEventListener("firebase-ready", loadMedia);
+    loadMedia();
+
+})();
+</script>
+
+
 </body>
-            </html>
+                </html>
