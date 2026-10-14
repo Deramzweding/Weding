@@ -628,7 +628,7 @@ EVENT
 }
 
 .event-card p{
-    font-size:11px;
+    font-size:14px;
 
     line-height:1.8;
 
@@ -1510,7 +1510,7 @@ COUPLE
             </h3>
 
             <p>
-                Putri dari Alm Bapak Basirun & Ibu Rokaya
+                Putri dari Alm. Bapak Basirun & Ibu Rokaya
             </p>
 
         </div>
@@ -1569,7 +1569,8 @@ COUNTDOWN
     <div class="section-title">
         Our Special Day
     </div>
-    <p class="section-sub">Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Ar Rum Ayat 21</p>
+    <p class="section-sub">Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.
+(Q.S Ar-Rum ayat 21)</p>
 
     <div class="timer">
 
@@ -1747,8 +1748,8 @@ EVENT
             </h3>
 
             <p>
-                Minggu<br>
-                13 Desember 2026<br>
+                Minggu, 13 Desember 2026<br>
+                <br>
                 07.30 WIB - 10.00 WIB
                 <br><br>
                 Rumah Mempelai Wanita<br>
@@ -1778,9 +1779,9 @@ EVENT
             </h3>
 
             <p>
-                Minggu<br>
-                13 Desember 2026<br>
-                10.00 WIB- selesai
+                Minggu, 13 Desember 2026<br>
+                <br>
+                10.00 WIB - Selesai
                 <br><br>
                 Rumah Mempelai Wanita<br>
                 Bekasi
@@ -1962,6 +1963,7 @@ GIFT
     <div class="section-title">
         Sending Love
     </div>
+    <p class="section-desc">Tanpa mengurangi rasa hormat, bagi rekan-rekan dan sahabat yang hendak memberikan tanda kasih untuk kami dapat melalui nomor rekening dibawah ini:</p>
 
     <div class="gift-card">
 
@@ -4356,5 +4358,208 @@ Ketik nama tamu, tekan BUAT LINK, lalu salin atau kirim lewat WhatsApp.
 </script>
 
 
+<!-- =========================
+AUTO STOP MUSIK SAAT KELUAR DARI WEB
+========================= -->
+<script>
+(function(){
+
+    var lanjut = false;
+
+    function ambilMusik(){
+        return document.getElementById("music");
+    }
+
+    function setTombol(aktif){
+        var btn = document.getElementById("musicBtn");
+        if(!btn){ return; }
+        if(aktif){
+            btn.classList.add("playing");
+        }else{
+            btn.classList.remove("playing");
+        }
+    }
+
+    document.addEventListener("visibilitychange", function(){
+
+        var a = ambilMusik();
+        if(!a){ return; }
+
+        if(document.hidden){
+
+            lanjut = !a.paused;
+            a.pause();
+            setTombol(false);
+
+        }else if(lanjut){
+
+            a.play().then(function(){
+                setTombol(true);
+            }).catch(function(){});
+
+            lanjut = false;
+
+        }
+
+    });
+
+    window.addEventListener("pagehide", function(){
+
+        var a = ambilMusik();
+        if(a){ a.pause(); }
+        setTombol(false);
+
+    });
+
+})();
+</script>
+
+<!-- =========================
+TOMBOL COPY REKENING (tambahan — tidak mengubah script lain)
+Menambahkan tombol "Copy Rekening" di bawah tiap rekening pada bagian Wedding Gift.
+========================= -->
+<style>
+.copy-rek-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    margin:4px auto 22px;
+    padding:10px 22px;
+
+    font-family:'Montserrat',sans-serif;
+    font-size:11px;
+    letter-spacing:.5px;
+
+    color:#fff;
+    background:transparent;
+
+    border:1px solid rgba(214,172,80,.75);
+    border-radius:999px;
+
+    cursor:pointer;
+    transition:.25s;
+
+    -webkit-tap-highlight-color:transparent;
+}
+
+.copy-rek-btn svg{
+    width:14px;
+    height:14px;
+    fill:currentColor;
+}
+
+.copy-rek-btn:hover,
+.copy-rek-btn:active{
+    background:rgba(214,172,80,.18);
+    border-color:#dcb45d;
+}
+
+.copy-rek-btn.copied{
+    background:#dcb45d;
+    border-color:#dcb45d;
+    color:#1a1409;
+}
+</style>
+
+<script>
+(function(){
+
+    var ICON =
+        "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\">" +
+        "<path d=\"M16 1H4C2.9 1 2 1.9 2 3v14h2V3h12V1zm3 4H8C6.9 5 6 5.9 6 7v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z\"/>" +
+        "</svg>";
+
+    function salin(teks, selesai){
+
+        if(navigator.clipboard && window.isSecureContext){
+            navigator.clipboard.writeText(teks).then(function(){
+                selesai(true);
+            }).catch(function(){
+                cadangan(teks, selesai);
+            });
+            return;
+        }
+
+        cadangan(teks, selesai);
+    }
+
+    function cadangan(teks, selesai){
+
+        var ta = document.createElement("textarea");
+        ta.value = teks;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.top = "-1000px";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, teks.length);
+
+        var ok = false;
+        try{ ok = document.execCommand("copy"); }catch(e){}
+
+        document.body.removeChild(ta);
+        selesai(ok);
+    }
+
+    var daftar = document.querySelectorAll(".gift-card p");
+
+    for(var i = 0; i < daftar.length; i++){
+
+        (function(p){
+
+            var baris = (p.innerText || p.textContent).split("\n");
+            var nomor = "";
+
+            for(var j = 0; j < baris.length; j++){
+                var bersih = baris[j].replace(/[\s.\-]/g, "");
+                if(/^\d{6,}$/.test(bersih)){
+                    nomor = bersih;
+                    break;
+                }
+            }
+
+            if(!nomor){ return; }
+
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "copy-rek-btn";
+            btn.innerHTML = "Copy Rekening " + ICON;
+
+            var timer;
+
+            btn.addEventListener("click", function(){
+
+                salin(nomor, function(berhasil){
+
+                    clearTimeout(timer);
+
+                    if(berhasil){
+                        btn.classList.add("copied");
+                        btn.innerHTML = "Tersalin &#10003;";
+                    }else{
+                        btn.innerHTML = "Gagal, salin manual";
+                    }
+
+                    timer = setTimeout(function(){
+                        btn.classList.remove("copied");
+                        btn.innerHTML = "Copy Rekening " + ICON;
+                    }, 2000);
+
+                });
+
+            });
+
+            p.insertAdjacentElement("afterend", btn);
+
+        })(daftar[i]);
+
+    }
+
+})();
+</script>
+
 </body>
-            </html>
+    </html>
