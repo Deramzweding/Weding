@@ -4241,7 +4241,7 @@ dan otomatis terisi di kolom nama RSVP. Tanpa ?to= tetap tampil dengan tulisan "
 
     var label = document.createElement("div");
     label.className = "guest-label";
-    label.textContent = "Kepada Bapak/Ibu/Saudara/i";
+    label.textContent = "Kepada Yth. Bapak/Ibu/Saudara/i";
 
     var nameEl = document.createElement("div");
     nameEl.className = "guest-name";
@@ -4564,6 +4564,345 @@ Menambahkan tombol "Copy Rekening" di bawah tiap rekening pada bagian Wedding Gi
         })(daftar[i]);
 
     }
+
+})();
+</script>
+<!-- =========================
+SAVE THE DATE → KALENDER HP (versi baru)
+TEMPEL TEPAT SEBELUM </body>. Blok lama tidak perlu dihapus:
+kartu lamanya otomatis diganti oleh blok ini.
+Android: buka form acara di kalender HP (cadangan: file .ics).
+iPhone: file .ics langsung bisa ditambah ke Kalender.
+Laptop / lainnya: Google Calendar.
+========================= -->
+<style>
+.sd-card{
+    position:relative;
+    width:min(400px,92%);
+    margin:34px auto 0;
+    padding:34px 22px 28px;
+    text-align:center;
+
+    background:rgba(10,8,5,.42);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+
+    border:1px solid rgba(215,171,78,.6);
+    border-radius:14px;
+}
+/* bingkai kedua di dalam kartu */
+.sd-card::before{
+    content:"";
+    position:absolute;
+    inset:6px;
+    border:1px solid rgba(215,171,78,.22);
+    border-radius:9px;
+    pointer-events:none;
+}
+
+.sd-day{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:22px;
+    color:rgba(255,255,255,.85);
+    line-height:1;
+}
+.sd-num{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    font-size:112px;
+    line-height:.95;
+    color:#e0ba68;
+    margin:6px 0 2px;
+    text-shadow:0 2px 24px rgba(214,170,73,.28);
+}
+.sd-month{
+    font-family:'Cormorant Garamond',serif;
+    font-size:24px;
+    letter-spacing:1px;
+    color:#fff;
+}
+
+.sd-line{
+    width:46px;
+    height:1px;
+    background:#d4aa54;
+    margin:22px auto;
+}
+
+.sd-times{
+    display:grid;
+    grid-template-columns:1fr 1px 1fr;
+    align-items:start;
+    gap:14px;
+}
+.sd-sep{
+    align-self:stretch;
+    background:rgba(215,171,78,.4);
+}
+.sd-t-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:21px;
+    font-weight:600;
+    color:#e4c77f;
+    margin-bottom:5px;
+}
+.sd-t-hour{
+    font-size:12px;
+    line-height:1.6;
+    color:rgba(255,255,255,.85);
+}
+
+.sd-place{
+    margin-top:20px;
+    font-size:12px;
+    line-height:1.7;
+    color:rgba(255,255,255,.72);
+}
+
+.sd-actions{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    margin-top:26px;
+}
+.sd-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    min-height:48px;
+    padding:13px 30px;
+
+    border:1px solid #d7ad51;
+    border-radius:999px;
+    background:#d7ad51;
+    color:#15110a;
+
+    font-family:'Montserrat',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+
+    cursor:pointer;
+    transition:background .3s,color .3s,transform .2s;
+    -webkit-tap-highlight-color:transparent;
+}
+.sd-btn svg{
+    width:16px;
+    height:16px;
+    fill:currentColor;
+    flex-shrink:0;
+}
+.sd-btn:hover{
+    background:transparent;
+    color:#e4c77f;
+}
+.sd-btn:active{
+    transform:scale(.97);
+}
+.sd-btn.done{
+    background:transparent;
+    color:#e4c77f;
+}
+.sd-link{
+    font-size:11px;
+    letter-spacing:1px;
+    color:rgba(255,255,255,.8);
+    text-decoration:none;
+    border-bottom:1px solid rgba(215,171,78,.6);
+    padding-bottom:2px;
+}
+.sd-link:hover{
+    color:#e4c77f;
+}
+.sd-btn:focus-visible,
+.sd-link:focus-visible{
+    outline:2px solid #e4c77f;
+    outline-offset:3px;
+}
+
+@media(max-width:360px){
+    .sd-num{ font-size:92px; }
+    .sd-times{ grid-template-columns:1fr; gap:16px; }
+    .sd-sep{ display:none; }
+}
+@media(prefers-reduced-motion:reduce){
+    .sd-btn{ transition:none; }
+}
+</style>
+
+<script>
+(function(){
+
+    /* ===== DATA ACARA (ubah di sini kalau perlu) ===== */
+    var JUDUL   = "Pernikahan Dewi & Panji";
+    var LOKASI  = "Rumah Mempelai Wanita, Bekasi";
+    var MAPS    = "https://maps.app.goo.gl/pNLY2BJ8sfxDJ4kK9?g_st=ac";
+    var DESK    = "Akad Nikah 08.00 - 10.00 WIB, Resepsi 10.00 WIB - selesai. Peta: " + MAPS;
+
+    /* 13 Des 2026, 08.00 WIB = 01.00 UTC | selesai 14.00 WIB = 07.00 UTC */
+    var MULAI   = Date.UTC(2026, 11, 13, 1, 0, 0);
+    var SELESAI = Date.UTC(2026, 11, 13, 7, 0, 0);
+    /* ================================================= */
+
+    var timer = document.querySelector(".countdown .timer");
+    if(!timer){ return; }
+
+    /* hapus tombol Save The Date versi lama kalau masih ada di file */
+    var lama = document.querySelectorAll(".std-wrap");
+    for(var i = 0; i < lama.length; i++){
+        lama[i].parentNode.removeChild(lama[i]);
+    }
+
+    var LABEL = "Simpan ke Kalender";
+
+    var ICON =
+        "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h5v5H7v-5z\"/></svg>";
+
+    var card = document.createElement("div");
+    card.className = "sd-card reveal";
+    card.innerHTML =
+        "<div class=\"sd-day\">Minggu</div>" +
+        "<div class=\"sd-num\">13</div>" +
+        "<div class=\"sd-month\">Desember 2026</div>" +
+        "<div class=\"sd-line\"></div>" +
+        "<div class=\"sd-times\">" +
+            "<div>" +
+                "<div class=\"sd-t-name\">Akad Nikah</div>" +
+                "<div class=\"sd-t-hour\">08.00 - 10.00 WIB</div>" +
+            "</div>" +
+            "<div class=\"sd-sep\"></div>" +
+            "<div>" +
+                "<div class=\"sd-t-name\">Resepsi</div>" +
+                "<div class=\"sd-t-hour\">10.00 WIB - selesai</div>" +
+            "</div>" +
+        "</div>" +
+        "<div class=\"sd-place\">Rumah Mempelai Wanita, Bekasi</div>" +
+        "<div class=\"sd-actions\">" +
+            "<button type=\"button\" class=\"sd-btn\" id=\"sdBtn\">" + ICON + "<span>" + LABEL + "</span></button>" +
+            "<a class=\"sd-link\" href=\"" + MAPS + "\" target=\"_blank\" rel=\"noopener\">Lihat lokasi</a>" +
+        "</div>";
+
+    timer.insertAdjacentElement("afterend", card);
+
+    var btn  = document.getElementById("sdBtn");
+    var span = btn.querySelector("span");
+    var resetTimer = null;
+
+    function konfirmasi(teks){
+        span.textContent = teks;
+        btn.classList.add("done");
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function(){
+            span.textContent = LABEL;
+            btn.classList.remove("done");
+        }, 2800);
+    }
+
+    /* ---------- file .ics (iPhone & cadangan Android) ---------- */
+
+    function fmt(ms){
+        return new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    }
+
+    function esc(t){
+        return String(t).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+    }
+
+    function unduhIcs(){
+
+        var baris = [
+            "BEGIN:VCALENDAR",
+            "VERSION:2.0",
+            "PRODID:-//Undangan Dewi & Panji//ID",
+            "CALSCALE:GREGORIAN",
+            "BEGIN:VEVENT",
+            "UID:dewi-panji-20261213@undangan",
+            "DTSTAMP:" + fmt(Date.now()),
+            "DTSTART:" + fmt(MULAI),
+            "DTEND:" + fmt(SELESAI),
+            "SUMMARY:" + esc(JUDUL),
+            "LOCATION:" + esc(LOKASI),
+            "DESCRIPTION:" + esc(DESK),
+            "BEGIN:VALARM",
+            "TRIGGER:-P1D",
+            "ACTION:DISPLAY",
+            "DESCRIPTION:Besok: " + esc(JUDUL),
+            "END:VALARM",
+            "END:VEVENT",
+            "END:VCALENDAR"
+        ];
+
+        var blob = new Blob([baris.join("\r\n")], {type:"text/calendar;charset=utf-8"});
+        var url  = URL.createObjectURL(blob);
+
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "Pernikahan-Dewi-Panji.ics";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    }
+
+    /* ---------- Android: langsung buka form acara di kalender ---------- */
+
+    function bukaKalenderAndroid(){
+
+        var intent =
+            "intent:#Intent;" +
+            "action=android.intent.action.INSERT;" +
+            "type=vnd.android.cursor.dir/event;" +
+            "S.title="         + encodeURIComponent(JUDUL)   + ";" +
+            "S.eventLocation=" + encodeURIComponent(LOKASI)  + ";" +
+            "S.description="   + encodeURIComponent(DESK)    + ";" +
+            "l.beginTime="     + MULAI                       + ";" +
+            "l.endTime="       + SELESAI                     + ";" +
+            "end";
+
+        window.location.href = intent;
+
+        /* kalau halaman masih terbuka (browser dalam aplikasi, dll),
+           pakai file .ics sebagai cadangan */
+        setTimeout(function(){
+            if(!document.hidden){ unduhIcs(); }
+        }, 1300);
+    }
+
+    /* ---------- laptop / lainnya: Google Calendar ---------- */
+
+    function bukaGoogleCalendar(){
+
+        var url =
+            "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+            "&text="     + encodeURIComponent(JUDUL) +
+            "&dates="    + fmt(MULAI) + "/" + fmt(SELESAI) +
+            "&details="  + encodeURIComponent(DESK) +
+            "&location=" + encodeURIComponent(LOKASI);
+
+        window.open(url, "_blank", "noopener");
+    }
+
+    btn.addEventListener("click", function(){
+
+        var ua = navigator.userAgent;
+
+        if(/Android/i.test(ua)){
+            bukaKalenderAndroid();
+            konfirmasi("Membuka kalender...");
+        }else if(/iPhone|iPad|iPod/i.test(ua) ||
+                 (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)){
+            unduhIcs();
+            konfirmasi("Silakan tambahkan ke Kalender");
+        }else{
+            bukaGoogleCalendar();
+            konfirmasi("Membuka Google Calendar...");
+        }
+    });
 
 })();
 </script>
