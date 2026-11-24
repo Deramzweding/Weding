@@ -1740,70 +1740,217 @@ EVENT
             Wedding Event
         </div>
 
-    </div>
+     <!-- =========================
+SAVE THE DATE v2 → GOOGLE CALENDAR
+TEMPEL TEPAT SEBELUM </body> (di bawah blok Save The Date sebelumnya).
+Blok sebelumnya tidak perlu dihapus: kartunya otomatis diganti oleh blok ini.
+Tombol langsung membuka Google Calendar di semua perangkat.
+========================= -->
+<style>
+.gc-card{
+    position:relative;
+    width:min(400px,92%);
+    margin:34px auto 0;
+    padding:30px 22px 28px;
+    text-align:center;
 
-    <div class="event-grid">
+    background:rgba(10,8,5,.42);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
 
-        <div class="event-card reveal left">
+    border:1px solid rgba(215,171,78,.6);
+    border-radius:14px;
+}
+.gc-card::before{
+    content:"";
+    position:absolute;
+    inset:6px;
+    border:1px solid rgba(215,171,78,.22);
+    border-radius:9px;
+    pointer-events:none;
+}
 
-            <div class="event-icon">
-                ♡
-            </div>
+.gc-date{
+    font-family:'Cormorant Garamond',serif;
+    font-size:29px;
+    font-weight:600;
+    line-height:1.25;
+    color:#e4c77f;
+    font-variant-numeric:lining-nums;
+    font-feature-settings:"lnum" 1;
+}
 
-            <h3>
-                Akad Nikah
-            </h3>
+.gc-line{
+    width:46px;
+    height:1px;
+    background:#d4aa54;
+    margin:20px auto;
+}
 
-            <p>
-                Minggu, 13 Desember 2026<br>
-                <br>
-                08.00 WIB - 10.00 WIB
-                <br><br>
-                Rumah Mempelai Wanita<br>
-                Bekasi
-            </p>
+.gc-times{
+    display:grid;
+    grid-template-columns:1fr 1px 1fr;
+    align-items:start;
+    gap:14px;
+}
+.gc-sep{
+    align-self:stretch;
+    background:rgba(215,171,78,.4);
+}
+.gc-t-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:21px;
+    font-weight:600;
+    color:#fff;
+    margin-bottom:5px;
+}
+.gc-t-hour{
+    font-size:12px;
+    line-height:1.6;
+    color:rgba(255,255,255,.82);
+}
 
-            <a
-                class="location-btn"
-                href="https://maps.app.goo.gl/pNLY2BJ8sfxDJ4kK9?g_st=ac"
-                target="_blank">
+.gc-place{
+    margin-top:20px;
+    font-size:12px;
+    line-height:1.7;
+    color:rgba(255,255,255,.72);
+}
 
-                ♧ &nbsp; LIHAT LOKASI
+.gc-actions{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    margin-top:26px;
+}
+.gc-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
 
-            </a>
+    min-height:48px;
+    padding:13px 32px;
 
-        </div>
+    border:1px solid #d7ad51;
+    border-radius:999px;
+    background:#d7ad51;
+    color:#15110a;
 
+    font-family:'Montserrat',sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1px;
+    text-decoration:none;
 
-        <div class="event-card reveal right">
+    transition:background .3s,color .3s,transform .2s;
+    -webkit-tap-highlight-color:transparent;
+}
+.gc-btn svg{
+    width:16px;
+    height:16px;
+    fill:currentColor;
+    flex-shrink:0;
+}
+.gc-btn:hover{
+    background:transparent;
+    color:#e4c77f;
+}
+.gc-btn:active{
+    transform:scale(.97);
+}
+.gc-link{
+    font-size:11px;
+    letter-spacing:1px;
+    color:rgba(255,255,255,.8);
+    text-decoration:none;
+    border-bottom:1px solid rgba(215,171,78,.6);
+    padding-bottom:2px;
+}
+.gc-link:hover{
+    color:#e4c77f;
+}
+.gc-btn:focus-visible,
+.gc-link:focus-visible{
+    outline:2px solid #e4c77f;
+    outline-offset:3px;
+}
 
-            <div class="event-icon">
-                ✧
-            </div>
+@media(max-width:360px){
+    .gc-date{ font-size:25px; }
+    .gc-times{ grid-template-columns:1fr; gap:16px; }
+    .gc-sep{ display:none; }
+}
+@media(prefers-reduced-motion:reduce){
+    .gc-btn{ transition:none; }
+}
+</style>
 
-            <h3>
-                Resepsi
-            </h3>
+<script>
+(function(){
 
-            <p>
-                Minggu, 13 Desember 2026<br>
-                <br>
-                10.00 WIB - Selesai
-                <br><br>
-                Rumah Mempelai Wanita<br>
-                Bekasi
-            </p>
+    /* ===== DATA ACARA (ubah di sini kalau perlu) ===== */
+    var JUDUL   = "Pernikahan Dewi & Panji";
+    var LOKASI  = "Rumah Mempelai Wanita, Bekasi";
+    var MAPS    = "https://maps.app.goo.gl/pNLY2BJ8sfxDJ4kK9?g_st=ac";
+    var DESK    = "Akad Nikah 08.00 - 10.00 WIB, Resepsi 10.00 WIB - selesai. Peta: " + MAPS;
 
-            <a
-                class="location-btn"
-                href="https://maps.app.goo.gl/pNLY2BJ8sfxDJ4kK9?g_st=ac"
-                target="_blank">
+    /* 13 Des 2026, 08.00 WIB = 01.00 UTC | selesai 14.00 WIB = 07.00 UTC */
+    var MULAI   = Date.UTC(2026, 11, 13, 1, 0, 0);
+    var SELESAI = Date.UTC(2026, 11, 13, 7, 0, 0);
+    /* ================================================= */
 
-                ♧ &nbsp; LIHAT LOKASI
+    var timer = document.querySelector(".event .container > .reveal");
 
-            </a>
+    /* hapus kartu Save The Date versi sebelumnya kalau masih ada */
+    var lama = document.querySelectorAll(".std-wrap, .sd-card");
+    for(var i = 0; i < lama.length; i++){
+        lama[i].parentNode.removeChild(lama[i]);
+    }
 
-        </div>
+    function fmt(ms){
+        return new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+    }
+
+    var kalender =
+        "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+        "&text="     + encodeURIComponent(JUDUL) +
+        "&dates="    + fmt(MULAI) + "/" + fmt(SELESAI) +
+        "&details="  + encodeURIComponent(DESK) +
+        "&location=" + encodeURIComponent(LOKASI);
+
+    var ICON =
+        "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h5v5H7v-5z\"/></svg>";
+
+    var card = document.createElement("div");
+    card.className = "gc-card reveal";
+    card.innerHTML =
+        "<div class=\"gc-date\">Minggu, 13 Desember 2026</div>" +
+        "<div class=\"gc-line\"></div>" +
+        "<div class=\"gc-times\">" +
+            "<div>" +
+                "<div class=\"gc-t-name\">Akad Nikah</div>" +
+                "<div class=\"gc-t-hour\">08.00 - 10.00 WIB</div>" +
+            "</div>" +
+            "<div class=\"gc-sep\"></div>" +
+            "<div>" +
+                "<div class=\"gc-t-name\">Resepsi</div>" +
+                "<div class=\"gc-t-hour\">10.00 WIB - selesai</div>" +
+            "</div>" +
+        "</div>" +
+        "<div class=\"gc-place\">Rumah Mempelai Wanita, Bekasi</div>" +
+        "<div class=\"gc-actions\">" +
+            "<a class=\"gc-btn\" href=\"" + kalender + "\" target=\"_blank\" rel=\"noopener\">" + ICON + "Save The Date</a>" +
+            "<a class=\"gc-link\" href=\"" + MAPS + "\" target=\"_blank\" rel=\"noopener\">Lihat lokasi</a>" +
+        "</div>";
+
+    timer.insertAdjacentElement("afterend", card);
+
+})();
+</script>
+
+ 
 
     </div>
 
@@ -4241,7 +4388,7 @@ dan otomatis terisi di kolom nama RSVP. Tanpa ?to= tetap tampil dengan tulisan "
 
     var label = document.createElement("div");
     label.className = "guest-label";
-    label.textContent = "Kepada Yth. Bapak/Ibu/Saudara/i";
+    label.textContent = "Kepada Yth. Bapak/Ibu/Saudara/i :";
 
     var nameEl = document.createElement("div");
     nameEl.className = "guest-name";
@@ -4748,7 +4895,7 @@ Laptop / lainnya: Google Calendar.
     var SELESAI = Date.UTC(2026, 11, 13, 7, 0, 0);
     /* ================================================= */
 
-    var timer = document.querySelector(".countdown .timer");
+    var timer = document.querySelector(".countdown .tidak pakai");
     if(!timer){ return; }
 
     /* hapus tombol Save The Date versi lama kalau masih ada di file */
@@ -4906,216 +5053,3 @@ Laptop / lainnya: Google Calendar.
 
 })();
 </script>
-<!-- =========================
-SAVE THE DATE v2 → GOOGLE CALENDAR
-TEMPEL TEPAT SEBELUM </body> (di bawah blok Save The Date sebelumnya).
-Blok sebelumnya tidak perlu dihapus: kartunya otomatis diganti oleh blok ini.
-Tombol langsung membuka Google Calendar di semua perangkat.
-========================= -->
-<style>
-.gc-card{
-    position:relative;
-    width:min(400px,92%);
-    margin:34px auto 0;
-    padding:30px 22px 28px;
-    text-align:center;
-
-    background:rgba(10,8,5,.42);
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-
-    border:1px solid rgba(215,171,78,.6);
-    border-radius:14px;
-}
-.gc-card::before{
-    content:"";
-    position:absolute;
-    inset:6px;
-    border:1px solid rgba(215,171,78,.22);
-    border-radius:9px;
-    pointer-events:none;
-}
-
-.gc-date{
-    font-family:'Cormorant Garamond',serif;
-    font-size:24px;
-    font-weight:600;
-    line-height:1.25;
-    color:#e4c77f;
-    font-variant-numeric:lining-nums;
-    font-feature-settings:"lnum" 1;
-}
-
-.gc-line{
-    width:46px;
-    height:1px;
-    background:#d4aa54;
-    margin:20px auto;
-}
-
-.gc-times{
-    display:grid;
-    grid-template-columns:1fr 1px 1fr;
-    align-items:start;
-    gap:14px;
-}
-.gc-sep{
-    align-self:stretch;
-    background:rgba(215,171,78,.4);
-}
-.gc-t-name{
-    font-family:'Cormorant Garamond',serif;
-    font-size:21px;
-    font-weight:600;
-    color:#fff;
-    margin-bottom:5px;
-}
-.gc-t-hour{
-    font-size:12px;
-    line-height:1.6;
-    color:rgba(255,255,255,.82);
-}
-
-.gc-place{
-    margin-top:20px;
-    font-size:12px;
-    line-height:1.7;
-    color:rgba(255,255,255,.72);
-}
-
-.gc-actions{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:14px;
-    margin-top:26px;
-}
-.gc-btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-
-    min-height:48px;
-    padding:13px 32px;
-
-    border:1px solid #d7ad51;
-    border-radius:999px;
-    background:#d7ad51;
-    color:#15110a;
-
-    font-family:'Montserrat',sans-serif;
-    font-size:12px;
-    font-weight:600;
-    letter-spacing:1px;
-    text-decoration:none;
-
-    transition:background .3s,color .3s,transform .2s;
-    -webkit-tap-highlight-color:transparent;
-}
-.gc-btn svg{
-    width:16px;
-    height:16px;
-    fill:currentColor;
-    flex-shrink:0;
-}
-.gc-btn:hover{
-    background:transparent;
-    color:#e4c77f;
-}
-.gc-btn:active{
-    transform:scale(.97);
-}
-.gc-link{
-    font-size:11px;
-    letter-spacing:1px;
-    color:rgba(255,255,255,.8);
-    text-decoration:none;
-    border-bottom:1px solid rgba(215,171,78,.6);
-    padding-bottom:2px;
-}
-.gc-link:hover{
-    color:#e4c77f;
-}
-.gc-btn:focus-visible,
-.gc-link:focus-visible{
-    outline:2px solid #e4c77f;
-    outline-offset:3px;
-}
-
-@media(max-width:360px){
-    .gc-date{ font-size:25px; }
-    .gc-times{ grid-template-columns:1fr; gap:16px; }
-    .gc-sep{ display:none; }
-}
-@media(prefers-reduced-motion:reduce){
-    .gc-btn{ transition:none; }
-}
-</style>
-
-<script>
-(function(){
-
-    /* ===== DATA ACARA (ubah di sini kalau perlu) ===== */
-    var JUDUL   = "Pernikahan Dewi & Panji";
-    var LOKASI  = "Rumah Mempelai Wanita, Bekasi";
-    var MAPS    = "https://maps.app.goo.gl/pNLY2BJ8sfxDJ4kK9?g_st=ac";
-    var DESK    = "Akad Nikah 08.00 - 10.00 WIB, Resepsi 10.00 WIB - selesai. Peta: " + MAPS;
-
-    /* 13 Des 2026, 08.00 WIB = 01.00 UTC | selesai 14.00 WIB = 07.00 UTC */
-    var MULAI   = Date.UTC(2026, 11, 13, 1, 0, 0);
-    var SELESAI = Date.UTC(2026, 11, 13, 7, 0, 0);
-    /* ================================================= */
-
-    var timer = document.querySelector(".countdown .timer");
-    if(!timer){ return; }
-
-    /* hapus kartu Save The Date versi sebelumnya kalau masih ada */
-    var lama = document.querySelectorAll(".std-wrap, .sd-card");
-    for(var i = 0; i < lama.length; i++){
-        lama[i].parentNode.removeChild(lama[i]);
-    }
-
-    function fmt(ms){
-        return new Date(ms).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-    }
-
-    var kalender =
-        "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-        "&text="     + encodeURIComponent(JUDUL) +
-        "&dates="    + fmt(MULAI) + "/" + fmt(SELESAI) +
-        "&details="  + encodeURIComponent(DESK) +
-        "&location=" + encodeURIComponent(LOKASI);
-
-    var ICON =
-        "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h5v5H7v-5z\"/></svg>";
-
-    var card = document.createElement("div");
-    card.className = "gc-card reveal";
-    card.innerHTML =
-        "<div class=\"gc-date\">Minggu, 13 Desember 2026</div>" +
-        "<div class=\"gc-line\"></div>" +
-        "<div class=\"gc-times\">" +
-            "<div>" +
-                "<div class=\"gc-t-name\">Akad Nikah</div>" +
-                "<div class=\"gc-t-hour\">08.00 - 10.00 WIB</div>" +
-            "</div>" +
-            "<div class=\"gc-sep\"></div>" +
-            "<div>" +
-                "<div class=\"gc-t-name\">Resepsi</div>" +
-                "<div class=\"gc-t-hour\">10.00 WIB - selesai</div>" +
-            "</div>" +
-        "</div>" +
-        "<div class=\"gc-place\">Rumah Mempelai Wanita, Bekasi</div>" +
-        "<div class=\"gc-actions\">" +
-            "<a class=\"gc-btn\" href=\"" + kalender + "\" target=\"_blank\" rel=\"noopener\">" + ICON + "Save The Date</a>" +
-            "<a class=\"gc-link\" href=\"" + MAPS + "\" target=\"_blank\" rel=\"noopener\">Lihat lokasi</a>" +
-        "</div>";
-
-    timer.insertAdjacentElement("afterend", card);
-
-})();
-</script>
-
-</body>
-    </html>
